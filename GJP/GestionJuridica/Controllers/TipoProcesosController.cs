@@ -94,7 +94,7 @@ namespace GestionJuridica.Controllers
             {
                 await db.SaveChangesAsync();
             }
-            catch (DbUpdateException)
+            catch (DbUpdateException ex)
             {
                 if (TipoProcesosExists(tipoProcesos.IdTiposProcesos))
                 {

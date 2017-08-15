@@ -12,7 +12,6 @@ namespace GestionJuridica.Models
         [Column(Order = 0)]
         public int IdTiposProcesos { get; set; }
 
-        [Key]
         [Column(Order = 1)]
         [StringLength(200)]
         public string Nombre { get; set; }
