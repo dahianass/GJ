@@ -25,6 +25,7 @@ namespace GestionJuridica
             builder.EntitySet<Chequeo>("Chequeos");
             builder.EntitySet<CamposAdicionales>("CamposAdicionales");
             builder.EntitySet<Usuarios>("Usuarios");
+            builder.EntitySet<Personas>("Personas");
             config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
         }
     }
