@@ -26,6 +26,13 @@ namespace GestionJuridica
             builder.EntitySet<CamposAdicionales>("CamposAdicionales");
             builder.EntitySet<Usuarios>("Usuarios");
             builder.EntitySet<Personas>("Personas");
+            builder.EntitySet<Distrito>("Distritoes");
+            builder.EntitySet<Circuito>("Circuitoes");
+            builder.EntitySet<Municipio>("Municipios");
+            builder.EntitySet<Juzgado>("Juzgadoes");
+            builder.EntitySet<TipoJuzgado>("TipoJuzgadoes");
+            builder.EntitySet<Proyectos>("Proyectos");
+            builder.EntitySet<Contratos>("Contratos");
             config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
         }
     }

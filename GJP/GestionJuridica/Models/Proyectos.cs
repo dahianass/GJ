@@ -19,6 +19,10 @@ namespace GestionJuridica.Models
 
         [Required]
         [StringLength(500)]
-        public string DescripcionProyecto { get; set; }
+        public string Interventor { get; set; }
+
+        [Required]
+        [StringLength(500)]
+        public string Representador { get; set; }
     }
 }
