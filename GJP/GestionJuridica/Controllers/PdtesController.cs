@@ -22,30 +22,30 @@ namespace GestionJuridica.Controllers
     using System.Web.Http.OData.Extensions;
     using GestionJuridica.Models;
     ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
-    builder.EntitySet<TipoJuzgado>("TipoJuzgadoes");
-    builder.EntitySet<Juzgado>("Juzgado"); 
+    builder.EntitySet<Pdtes>("Pdtes");
+    builder.EntitySet<Formulario>("Formulario"); 
     config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
     */
-    public class TipoJuzgadoesController : ODataController
+    public class PdtesController : ODataController
     {
         private ModelJuridica db = new ModelJuridica();
 
-        // GET: odata/TipoJuzgadoes
+        // GET: odata/Pdtes
         [EnableQuery]
-        public IQueryable<TipoJuzgado> GetTipoJuzgadoes()
+        public IQueryable<Pdtes> GetPdtes()
         {
-            return db.TipoJuzgado;
+            return db.Pdtes;
         }
 
-        // GET: odata/TipoJuzgadoes(5)
+        // GET: odata/Pdtes(5)
         [EnableQuery]
-        public SingleResult<TipoJuzgado> GetTipoJuzgado([FromODataUri] int key)
+        public SingleResult<Pdtes> GetPdtes([FromODataUri] int key)
         {
-            return SingleResult.Create(db.TipoJuzgado.Where(tipoJuzgado => tipoJuzgado.IdTipoJuzgado == key));
+            return SingleResult.Create(db.Pdtes.Where(pdtes => pdtes.IdPdte == key));
         }
 
-        // PUT: odata/TipoJuzgadoes(5)
-        public async Task<IHttpActionResult> Put([FromODataUri] int key, Delta<TipoJuzgado> patch)
+        // PUT: odata/Pdtes(5)
+        public async Task<IHttpActionResult> Put([FromODataUri] int key, Delta<Pdtes> patch)
         {
             Validate(patch.GetEntity());
 
@@ -54,13 +54,13 @@ namespace GestionJuridica.Controllers
                 return BadRequest(ModelState);
             }
 
-            TipoJuzgado tipoJuzgado = await db.TipoJuzgado.FindAsync(key);
-            if (tipoJuzgado == null)
+            Pdtes pdtes = await db.Pdtes.FindAsync(key);
+            if (pdtes == null)
             {
                 return NotFound();
             }
 
-            patch.Put(tipoJuzgado);
+            patch.Put(pdtes);
 
             try
             {
@@ -68,7 +68,7 @@ namespace GestionJuridica.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!TipoJuzgadoExists(key))
+                if (!PdtesExists(key))
                 {
                     return NotFound();
                 }
@@ -78,26 +78,26 @@ namespace GestionJuridica.Controllers
                 }
             }
 
-            return Updated(tipoJuzgado);
+            return Updated(pdtes);
         }
 
-        // POST: odata/TipoJuzgadoes
-        public async Task<IHttpActionResult> Post(TipoJuzgado tipoJuzgado)
+        // POST: odata/Pdtes
+        public async Task<IHttpActionResult> Post(Pdtes pdtes)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.TipoJuzgado.Add(tipoJuzgado);
+            db.Pdtes.Add(pdtes);
             await db.SaveChangesAsync();
 
-            return Created(tipoJuzgado);
+            return Created(pdtes);
         }
 
-        // PATCH: odata/TipoJuzgadoes(5)
+        // PATCH: odata/Pdtes(5)
         [AcceptVerbs("PATCH", "MERGE")]
-        public async Task<IHttpActionResult> Patch([FromODataUri] int key, Delta<TipoJuzgado> patch)
+        public async Task<IHttpActionResult> Patch([FromODataUri] int key, Delta<Pdtes> patch)
         {
             Validate(patch.GetEntity());
 
@@ -106,13 +106,13 @@ namespace GestionJuridica.Controllers
                 return BadRequest(ModelState);
             }
 
-            TipoJuzgado tipoJuzgado = await db.TipoJuzgado.FindAsync(key);
-            if (tipoJuzgado == null)
+            Pdtes pdtes = await db.Pdtes.FindAsync(key);
+            if (pdtes == null)
             {
                 return NotFound();
             }
 
-            patch.Patch(tipoJuzgado);
+            patch.Patch(pdtes);
 
             try
             {
@@ -120,7 +120,7 @@ namespace GestionJuridica.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!TipoJuzgadoExists(key))
+                if (!PdtesExists(key))
                 {
                     return NotFound();
                 }
@@ -130,29 +130,29 @@ namespace GestionJuridica.Controllers
                 }
             }
 
-            return Updated(tipoJuzgado);
+            return Updated(pdtes);
         }
 
-        // DELETE: odata/TipoJuzgadoes(5)
+        // DELETE: odata/Pdtes(5)
         public async Task<IHttpActionResult> Delete([FromODataUri] int key)
         {
-            TipoJuzgado tipoJuzgado = await db.TipoJuzgado.FindAsync(key);
-            if (tipoJuzgado == null)
+            Pdtes pdtes = await db.Pdtes.FindAsync(key);
+            if (pdtes == null)
             {
                 return NotFound();
             }
 
-            db.TipoJuzgado.Remove(tipoJuzgado);
+            db.Pdtes.Remove(pdtes);
             await db.SaveChangesAsync();
 
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // GET: odata/TipoJuzgadoes(5)/Juzgado
+        // GET: odata/Pdtes(5)/Formulario
         [EnableQuery]
-        public IQueryable<Juzgado> GetJuzgado([FromODataUri] int key)
+        public SingleResult<Formulario> GetFormulario([FromODataUri] int key)
         {
-            return db.TipoJuzgado.Where(m => m.IdTipoJuzgado == key).SelectMany(m => m.Juzgado);
+            return SingleResult.Create(db.Pdtes.Where(m => m.IdPdte == key).Select(m => m.Formulario));
         }
 
         protected override void Dispose(bool disposing)
@@ -164,9 +164,9 @@ namespace GestionJuridica.Controllers
             base.Dispose(disposing);
         }
 
-        private bool TipoJuzgadoExists(int key)
+        private bool PdtesExists(int key)
         {
-            return db.TipoJuzgado.Count(e => e.IdTipoJuzgado == key) > 0;
+            return db.Pdtes.Count(e => e.IdPdte == key) > 0;
         }
     }
 }

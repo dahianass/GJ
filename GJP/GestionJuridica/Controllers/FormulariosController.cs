@@ -22,31 +22,34 @@ namespace GestionJuridica.Controllers
     using System.Web.Http.OData.Extensions;
     using GestionJuridica.Models;
     ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
-    builder.EntitySet<Juzgado>("Juzgadoes");
+    builder.EntitySet<Formulario>("Formularios");
+    builder.EntitySet<EstadosFormulario>("EstadosFormulario"); 
+    builder.EntitySet<Historia>("Historia"); 
     builder.EntitySet<Municipio>("Municipio"); 
-    builder.EntitySet<Naturaleza>("Naturaleza"); 
+    builder.EntitySet<Pdtes>("Pdtes"); 
+    builder.EntitySet<Proyectos>("Proyectos"); 
     config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
     */
-    public class JuzgadoesController : ODataController
+    public class FormulariosController : ODataController
     {
         private ModelJuridica db = new ModelJuridica();
 
-        // GET: odata/Juzgadoes
+        // GET: odata/Formularios
         [EnableQuery]
-        public IQueryable<Juzgado> GetJuzgadoes()
+        public IQueryable<Formulario> GetFormularios()
         {
-            return db.Juzgado;
+            return db.Formulario;
         }
 
-        // GET: odata/Juzgadoes(5)
+        // GET: odata/Formularios(5)
         [EnableQuery]
-        public SingleResult<Juzgado> GetJuzgado([FromODataUri] int key)
+        public SingleResult<Formulario> GetFormulario([FromODataUri] int key)
         {
-            return SingleResult.Create(db.Juzgado.Where(juzgado => juzgado.IdJuzgado == key));
+            return SingleResult.Create(db.Formulario.Where(formulario => formulario.IdFormulario == key));
         }
 
-        // PUT: odata/Juzgadoes(5)
-        public async Task<IHttpActionResult> Put([FromODataUri] int key, Delta<Juzgado> patch)
+        // PUT: odata/Formularios(5)
+        public async Task<IHttpActionResult> Put([FromODataUri] int key, Delta<Formulario> patch)
         {
             Validate(patch.GetEntity());
 
@@ -55,13 +58,13 @@ namespace GestionJuridica.Controllers
                 return BadRequest(ModelState);
             }
 
-            Juzgado juzgado = await db.Juzgado.FindAsync(key);
-            if (juzgado == null)
+            Formulario formulario = await db.Formulario.FindAsync(key);
+            if (formulario == null)
             {
                 return NotFound();
             }
 
-            patch.Put(juzgado);
+            patch.Put(formulario);
 
             try
             {
@@ -69,7 +72,7 @@ namespace GestionJuridica.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!JuzgadoExists(key))
+                if (!FormularioExists(key))
                 {
                     return NotFound();
                 }
@@ -79,26 +82,26 @@ namespace GestionJuridica.Controllers
                 }
             }
 
-            return Updated(juzgado);
+            return Updated(formulario);
         }
 
-        // POST: odata/Juzgadoes
-        public async Task<IHttpActionResult> Post(Juzgado juzgado)
+        // POST: odata/Formularios
+        public async Task<IHttpActionResult> Post(Formulario formulario)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Juzgado.Add(juzgado);
+            db.Formulario.Add(formulario);
             await db.SaveChangesAsync();
 
-            return Created(juzgado);
+            return Created(formulario);
         }
 
-        // PATCH: odata/Juzgadoes(5)
+        // PATCH: odata/Formularios(5)
         [AcceptVerbs("PATCH", "MERGE")]
-        public async Task<IHttpActionResult> Patch([FromODataUri] int key, Delta<Juzgado> patch)
+        public async Task<IHttpActionResult> Patch([FromODataUri] int key, Delta<Formulario> patch)
         {
             Validate(patch.GetEntity());
 
@@ -107,13 +110,13 @@ namespace GestionJuridica.Controllers
                 return BadRequest(ModelState);
             }
 
-            Juzgado juzgado = await db.Juzgado.FindAsync(key);
-            if (juzgado == null)
+            Formulario formulario = await db.Formulario.FindAsync(key);
+            if (formulario == null)
             {
                 return NotFound();
             }
 
-            patch.Patch(juzgado);
+            patch.Patch(formulario);
 
             try
             {
@@ -121,7 +124,7 @@ namespace GestionJuridica.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!JuzgadoExists(key))
+                if (!FormularioExists(key))
                 {
                     return NotFound();
                 }
@@ -131,36 +134,57 @@ namespace GestionJuridica.Controllers
                 }
             }
 
-            return Updated(juzgado);
+            return Updated(formulario);
         }
 
-        // DELETE: odata/Juzgadoes(5)
+        // DELETE: odata/Formularios(5)
         public async Task<IHttpActionResult> Delete([FromODataUri] int key)
         {
-            Juzgado juzgado = await db.Juzgado.FindAsync(key);
-            if (juzgado == null)
+            Formulario formulario = await db.Formulario.FindAsync(key);
+            if (formulario == null)
             {
                 return NotFound();
             }
 
-            db.Juzgado.Remove(juzgado);
+            db.Formulario.Remove(formulario);
             await db.SaveChangesAsync();
 
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // GET: odata/Juzgadoes(5)/Municipio
+        // GET: odata/Formularios(5)/EstadosFormulario
+        [EnableQuery]
+        public IQueryable<EstadosFormulario> GetEstadosFormulario([FromODataUri] int key)
+        {
+            return db.Formulario.Where(m => m.IdFormulario == key).SelectMany(m => m.EstadosFormulario);
+        }
+
+        // GET: odata/Formularios(5)/Historia
+        [EnableQuery]
+        public IQueryable<Historia> GetHistoria([FromODataUri] int key)
+        {
+            return db.Formulario.Where(m => m.IdFormulario == key).SelectMany(m => m.Historia);
+        }
+
+        // GET: odata/Formularios(5)/Municipio
         [EnableQuery]
         public SingleResult<Municipio> GetMunicipio([FromODataUri] int key)
         {
-            return SingleResult.Create(db.Juzgado.Where(m => m.IdJuzgado == key).Select(m => m.Municipio));
+            return SingleResult.Create(db.Formulario.Where(m => m.IdFormulario == key).Select(m => m.Municipio));
         }
 
-        // GET: odata/Juzgadoes(5)/Naturaleza
+        // GET: odata/Formularios(5)/Pdtes
         [EnableQuery]
-        public SingleResult<Naturaleza> GetNaturaleza([FromODataUri] int key)
+        public IQueryable<Pdtes> GetPdtes([FromODataUri] int key)
         {
-            return SingleResult.Create(db.Juzgado.Where(m => m.IdJuzgado == key).Select(m => m.Naturaleza));
+            return db.Formulario.Where(m => m.IdFormulario == key).SelectMany(m => m.Pdtes);
+        }
+
+        // GET: odata/Formularios(5)/Proyectos
+        [EnableQuery]
+        public SingleResult<Proyectos> GetProyectos([FromODataUri] int key)
+        {
+            return SingleResult.Create(db.Formulario.Where(m => m.IdFormulario == key).Select(m => m.Proyectos));
         }
 
         protected override void Dispose(bool disposing)
@@ -172,9 +196,9 @@ namespace GestionJuridica.Controllers
             base.Dispose(disposing);
         }
 
-        private bool JuzgadoExists(int key)
+        private bool FormularioExists(int key)
         {
-            return db.Juzgado.Count(e => e.IdJuzgado == key) > 0;
+            return db.Formulario.Count(e => e.IdFormulario == key) > 0;
         }
     }
 }

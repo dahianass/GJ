@@ -8,6 +8,12 @@ namespace GestionJuridica.Models
 
     public partial class Contratos
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Contratos()
+        {
+            Proyectos = new HashSet<Proyectos>();
+        }
+
         [Key]
         public int IdContrato { get; set; }
 
@@ -20,5 +26,8 @@ namespace GestionJuridica.Models
         [Required]
         [StringLength(500)]
         public string Descripcion { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Proyectos> Proyectos { get; set; }
     }
 }

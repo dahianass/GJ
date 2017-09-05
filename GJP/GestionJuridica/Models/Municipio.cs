@@ -12,6 +12,7 @@ namespace GestionJuridica.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Municipio()
         {
+            Formulario = new HashSet<Formulario>();
             Juzgado = new HashSet<Juzgado>();
         }
 
@@ -25,6 +26,9 @@ namespace GestionJuridica.Models
         public int IdCircuito { get; set; }
 
         public virtual Circuito Circuito { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Formulario> Formulario { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Juzgado> Juzgado { get; set; }

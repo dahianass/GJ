@@ -12,20 +12,22 @@ namespace GestionJuridica.Models
         [Key]
         public int IdJuzgado { get; set; }
 
-        public int IdTipoJuzgado { get; set; }
-
         public int IdMunicipio { get; set; }
 
         public bool Circuito { get; set; }
 
         [StringLength(200)]
-        public string Descripción { get; set; }
-
-        [StringLength(200)]
         public string Juez { get; set; }
+
+        [Column("Juzgado")]
+        [Required]
+        [StringLength(200)]
+        public string Juzgado1 { get; set; }
+
+        public int IdNaturaleza { get; set; }
 
         public virtual Municipio Municipio { get; set; }
 
-        public virtual TipoJuzgado TipoJuzgado { get; set; }
+        public virtual Naturaleza Naturaleza { get; set; }
     }
 }

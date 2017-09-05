@@ -22,31 +22,29 @@ namespace GestionJuridica.Controllers
     using System.Web.Http.OData.Extensions;
     using GestionJuridica.Models;
     ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
-    builder.EntitySet<Juzgado>("Juzgadoes");
-    builder.EntitySet<Municipio>("Municipio"); 
-    builder.EntitySet<Naturaleza>("Naturaleza"); 
+    builder.EntitySet<Auditoria>("Auditorias");
     config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
     */
-    public class JuzgadoesController : ODataController
+    public class AuditoriasController : ODataController
     {
         private ModelJuridica db = new ModelJuridica();
 
-        // GET: odata/Juzgadoes
+        // GET: odata/Auditorias
         [EnableQuery]
-        public IQueryable<Juzgado> GetJuzgadoes()
+        public IQueryable<Auditoria> GetAuditorias()
         {
-            return db.Juzgado;
+            return db.Auditoria;
         }
 
-        // GET: odata/Juzgadoes(5)
+        // GET: odata/Auditorias(5)
         [EnableQuery]
-        public SingleResult<Juzgado> GetJuzgado([FromODataUri] int key)
+        public SingleResult<Auditoria> GetAuditoria([FromODataUri] int key)
         {
-            return SingleResult.Create(db.Juzgado.Where(juzgado => juzgado.IdJuzgado == key));
+            return SingleResult.Create(db.Auditoria.Where(auditoria => auditoria.IdAuditoria == key));
         }
 
-        // PUT: odata/Juzgadoes(5)
-        public async Task<IHttpActionResult> Put([FromODataUri] int key, Delta<Juzgado> patch)
+        // PUT: odata/Auditorias(5)
+        public async Task<IHttpActionResult> Put([FromODataUri] int key, Delta<Auditoria> patch)
         {
             Validate(patch.GetEntity());
 
@@ -55,13 +53,13 @@ namespace GestionJuridica.Controllers
                 return BadRequest(ModelState);
             }
 
-            Juzgado juzgado = await db.Juzgado.FindAsync(key);
-            if (juzgado == null)
+            Auditoria auditoria = await db.Auditoria.FindAsync(key);
+            if (auditoria == null)
             {
                 return NotFound();
             }
 
-            patch.Put(juzgado);
+            patch.Put(auditoria);
 
             try
             {
@@ -69,7 +67,7 @@ namespace GestionJuridica.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!JuzgadoExists(key))
+                if (!AuditoriaExists(key))
                 {
                     return NotFound();
                 }
@@ -79,26 +77,26 @@ namespace GestionJuridica.Controllers
                 }
             }
 
-            return Updated(juzgado);
+            return Updated(auditoria);
         }
 
-        // POST: odata/Juzgadoes
-        public async Task<IHttpActionResult> Post(Juzgado juzgado)
+        // POST: odata/Auditorias
+        public async Task<IHttpActionResult> Post(Auditoria auditoria)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Juzgado.Add(juzgado);
+            db.Auditoria.Add(auditoria);
             await db.SaveChangesAsync();
 
-            return Created(juzgado);
+            return Created(auditoria);
         }
 
-        // PATCH: odata/Juzgadoes(5)
+        // PATCH: odata/Auditorias(5)
         [AcceptVerbs("PATCH", "MERGE")]
-        public async Task<IHttpActionResult> Patch([FromODataUri] int key, Delta<Juzgado> patch)
+        public async Task<IHttpActionResult> Patch([FromODataUri] int key, Delta<Auditoria> patch)
         {
             Validate(patch.GetEntity());
 
@@ -107,13 +105,13 @@ namespace GestionJuridica.Controllers
                 return BadRequest(ModelState);
             }
 
-            Juzgado juzgado = await db.Juzgado.FindAsync(key);
-            if (juzgado == null)
+            Auditoria auditoria = await db.Auditoria.FindAsync(key);
+            if (auditoria == null)
             {
                 return NotFound();
             }
 
-            patch.Patch(juzgado);
+            patch.Patch(auditoria);
 
             try
             {
@@ -121,7 +119,7 @@ namespace GestionJuridica.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!JuzgadoExists(key))
+                if (!AuditoriaExists(key))
                 {
                     return NotFound();
                 }
@@ -131,36 +129,22 @@ namespace GestionJuridica.Controllers
                 }
             }
 
-            return Updated(juzgado);
+            return Updated(auditoria);
         }
 
-        // DELETE: odata/Juzgadoes(5)
+        // DELETE: odata/Auditorias(5)
         public async Task<IHttpActionResult> Delete([FromODataUri] int key)
         {
-            Juzgado juzgado = await db.Juzgado.FindAsync(key);
-            if (juzgado == null)
+            Auditoria auditoria = await db.Auditoria.FindAsync(key);
+            if (auditoria == null)
             {
                 return NotFound();
             }
 
-            db.Juzgado.Remove(juzgado);
+            db.Auditoria.Remove(auditoria);
             await db.SaveChangesAsync();
 
             return StatusCode(HttpStatusCode.NoContent);
-        }
-
-        // GET: odata/Juzgadoes(5)/Municipio
-        [EnableQuery]
-        public SingleResult<Municipio> GetMunicipio([FromODataUri] int key)
-        {
-            return SingleResult.Create(db.Juzgado.Where(m => m.IdJuzgado == key).Select(m => m.Municipio));
-        }
-
-        // GET: odata/Juzgadoes(5)/Naturaleza
-        [EnableQuery]
-        public SingleResult<Naturaleza> GetNaturaleza([FromODataUri] int key)
-        {
-            return SingleResult.Create(db.Juzgado.Where(m => m.IdJuzgado == key).Select(m => m.Naturaleza));
         }
 
         protected override void Dispose(bool disposing)
@@ -172,9 +156,9 @@ namespace GestionJuridica.Controllers
             base.Dispose(disposing);
         }
 
-        private bool JuzgadoExists(int key)
+        private bool AuditoriaExists(int key)
         {
-            return db.Juzgado.Count(e => e.IdJuzgado == key) > 0;
+            return db.Auditoria.Count(e => e.IdAuditoria == key) > 0;
         }
     }
 }

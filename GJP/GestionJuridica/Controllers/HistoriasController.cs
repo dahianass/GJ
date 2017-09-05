@@ -22,31 +22,30 @@ namespace GestionJuridica.Controllers
     using System.Web.Http.OData.Extensions;
     using GestionJuridica.Models;
     ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
-    builder.EntitySet<Juzgado>("Juzgadoes");
-    builder.EntitySet<Municipio>("Municipio"); 
-    builder.EntitySet<Naturaleza>("Naturaleza"); 
+    builder.EntitySet<Historia>("Historias");
+    builder.EntitySet<Formulario>("Formulario"); 
     config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
     */
-    public class JuzgadoesController : ODataController
+    public class HistoriasController : ODataController
     {
         private ModelJuridica db = new ModelJuridica();
 
-        // GET: odata/Juzgadoes
+        // GET: odata/Historias
         [EnableQuery]
-        public IQueryable<Juzgado> GetJuzgadoes()
+        public IQueryable<Historia> GetHistorias()
         {
-            return db.Juzgado;
+            return db.Historia;
         }
 
-        // GET: odata/Juzgadoes(5)
+        // GET: odata/Historias(5)
         [EnableQuery]
-        public SingleResult<Juzgado> GetJuzgado([FromODataUri] int key)
+        public SingleResult<Historia> GetHistoria([FromODataUri] int key)
         {
-            return SingleResult.Create(db.Juzgado.Where(juzgado => juzgado.IdJuzgado == key));
+            return SingleResult.Create(db.Historia.Where(historia => historia.IdHistoria == key));
         }
 
-        // PUT: odata/Juzgadoes(5)
-        public async Task<IHttpActionResult> Put([FromODataUri] int key, Delta<Juzgado> patch)
+        // PUT: odata/Historias(5)
+        public async Task<IHttpActionResult> Put([FromODataUri] int key, Delta<Historia> patch)
         {
             Validate(patch.GetEntity());
 
@@ -55,13 +54,13 @@ namespace GestionJuridica.Controllers
                 return BadRequest(ModelState);
             }
 
-            Juzgado juzgado = await db.Juzgado.FindAsync(key);
-            if (juzgado == null)
+            Historia historia = await db.Historia.FindAsync(key);
+            if (historia == null)
             {
                 return NotFound();
             }
 
-            patch.Put(juzgado);
+            patch.Put(historia);
 
             try
             {
@@ -69,7 +68,7 @@ namespace GestionJuridica.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!JuzgadoExists(key))
+                if (!HistoriaExists(key))
                 {
                     return NotFound();
                 }
@@ -79,26 +78,26 @@ namespace GestionJuridica.Controllers
                 }
             }
 
-            return Updated(juzgado);
+            return Updated(historia);
         }
 
-        // POST: odata/Juzgadoes
-        public async Task<IHttpActionResult> Post(Juzgado juzgado)
+        // POST: odata/Historias
+        public async Task<IHttpActionResult> Post(Historia historia)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Juzgado.Add(juzgado);
+            db.Historia.Add(historia);
             await db.SaveChangesAsync();
 
-            return Created(juzgado);
+            return Created(historia);
         }
 
-        // PATCH: odata/Juzgadoes(5)
+        // PATCH: odata/Historias(5)
         [AcceptVerbs("PATCH", "MERGE")]
-        public async Task<IHttpActionResult> Patch([FromODataUri] int key, Delta<Juzgado> patch)
+        public async Task<IHttpActionResult> Patch([FromODataUri] int key, Delta<Historia> patch)
         {
             Validate(patch.GetEntity());
 
@@ -107,13 +106,13 @@ namespace GestionJuridica.Controllers
                 return BadRequest(ModelState);
             }
 
-            Juzgado juzgado = await db.Juzgado.FindAsync(key);
-            if (juzgado == null)
+            Historia historia = await db.Historia.FindAsync(key);
+            if (historia == null)
             {
                 return NotFound();
             }
 
-            patch.Patch(juzgado);
+            patch.Patch(historia);
 
             try
             {
@@ -121,7 +120,7 @@ namespace GestionJuridica.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!JuzgadoExists(key))
+                if (!HistoriaExists(key))
                 {
                     return NotFound();
                 }
@@ -131,36 +130,29 @@ namespace GestionJuridica.Controllers
                 }
             }
 
-            return Updated(juzgado);
+            return Updated(historia);
         }
 
-        // DELETE: odata/Juzgadoes(5)
+        // DELETE: odata/Historias(5)
         public async Task<IHttpActionResult> Delete([FromODataUri] int key)
         {
-            Juzgado juzgado = await db.Juzgado.FindAsync(key);
-            if (juzgado == null)
+            Historia historia = await db.Historia.FindAsync(key);
+            if (historia == null)
             {
                 return NotFound();
             }
 
-            db.Juzgado.Remove(juzgado);
+            db.Historia.Remove(historia);
             await db.SaveChangesAsync();
 
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // GET: odata/Juzgadoes(5)/Municipio
+        // GET: odata/Historias(5)/Formulario
         [EnableQuery]
-        public SingleResult<Municipio> GetMunicipio([FromODataUri] int key)
+        public SingleResult<Formulario> GetFormulario([FromODataUri] int key)
         {
-            return SingleResult.Create(db.Juzgado.Where(m => m.IdJuzgado == key).Select(m => m.Municipio));
-        }
-
-        // GET: odata/Juzgadoes(5)/Naturaleza
-        [EnableQuery]
-        public SingleResult<Naturaleza> GetNaturaleza([FromODataUri] int key)
-        {
-            return SingleResult.Create(db.Juzgado.Where(m => m.IdJuzgado == key).Select(m => m.Naturaleza));
+            return SingleResult.Create(db.Historia.Where(m => m.IdHistoria == key).Select(m => m.Formulario));
         }
 
         protected override void Dispose(bool disposing)
@@ -172,9 +164,9 @@ namespace GestionJuridica.Controllers
             base.Dispose(disposing);
         }
 
-        private bool JuzgadoExists(int key)
+        private bool HistoriaExists(int key)
         {
-            return db.Juzgado.Count(e => e.IdJuzgado == key) > 0;
+            return db.Historia.Count(e => e.IdHistoria == key) > 0;
         }
     }
 }
