@@ -15,6 +15,14 @@ namespace GestionJuridica
         {
             config.EnableCors();
             // Web API configuration and services
+            // Web API routes
+            config.MapHttpAttributeRoutes();
+
+            config.Routes.MapHttpRoute(
+                name: "DefaultApi",
+                routeTemplate: "api/{controller}/{id}",
+                defaults: new { id = RouteParameter.Optional }
+            );
 
             ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
             builder.EntitySet<EstadosTipos>("EstadosTipos");
@@ -40,6 +48,7 @@ namespace GestionJuridica
             builder.EntitySet<Auditoria>("Auditorias");
             builder.EntitySet<Naturaleza>("Naturalezas");
             builder.EntitySet<smlv>("smlvs");
+            builder.EntitySet<CamposFormulario>("CamposFormularios");
             config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
         }
     }

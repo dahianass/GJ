@@ -14,6 +14,6 @@ namespace GestionJuridica.Models
 
         public int Valor { get; set; }
 
-        public int Año { get; set; }
+        public int Ano { get; set; }
     }
 }

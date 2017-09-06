@@ -14,6 +14,7 @@ namespace GestionJuridica.Models
 
         public virtual DbSet<Auditoria> Auditoria { get; set; }
         public virtual DbSet<CamposAdicionales> CamposAdicionales { get; set; }
+        public virtual DbSet<CamposFormulario> CamposFormulario { get; set; }
         public virtual DbSet<CamposTipos> CamposTipos { get; set; }
         public virtual DbSet<Chequeo> Chequeo { get; set; }
         public virtual DbSet<ChequeoFormulario> ChequeoFormulario { get; set; }
@@ -41,6 +42,11 @@ namespace GestionJuridica.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<CamposAdicionales>()
+                .HasMany(e => e.CamposFormulario)
+                .WithRequired(e => e.CamposAdicionales)
+                .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<CamposAdicionales>()
                 .HasMany(e => e.CamposTipos)
                 .WithRequired(e => e.CamposAdicionales)
@@ -75,6 +81,11 @@ namespace GestionJuridica.Models
             modelBuilder.Entity<EstadosProcesales>()
                 .HasMany(e => e.EstadosTipos)
                 .WithRequired(e => e.EstadosProcesales)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Formulario>()
+                .HasMany(e => e.CamposFormulario)
+                .WithRequired(e => e.Formulario)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Formulario>()

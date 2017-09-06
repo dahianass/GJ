@@ -13,6 +13,7 @@ namespace GestionJuridica.Models
         public EstadosFormulario()
         {
             ChequeoFormulario = new HashSet<ChequeoFormulario>();
+            Pdtes = new HashSet<Pdtes>();
         }
 
         [Key]
@@ -33,5 +34,8 @@ namespace GestionJuridica.Models
         public virtual ICollection<ChequeoFormulario> ChequeoFormulario { get; set; }
 
         public virtual Formulario Formulario { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Pdtes> Pdtes { get; set; }
     }
 }

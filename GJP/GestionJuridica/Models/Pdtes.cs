@@ -28,6 +28,8 @@ namespace GestionJuridica.Models
 
         public DateTime FechaRecordatorio { get; set; }
 
+        public virtual EstadosFormulario EstadosFormulario { get; set; }
+
         public virtual Formulario Formulario { get; set; }
     }
 }
