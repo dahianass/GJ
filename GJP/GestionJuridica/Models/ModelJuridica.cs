@@ -22,6 +22,7 @@ namespace GestionJuridica.Models
         public virtual DbSet<Circuito> Circuito { get; set; }
         public virtual DbSet<Contratos> Contratos { get; set; }
         public virtual DbSet<Distrito> Distrito { get; set; }
+        public virtual DbSet<Documentos> Documentos { get; set; }
         public virtual DbSet<EstadosFormulario> EstadosFormulario { get; set; }
         public virtual DbSet<EstadosProcesales> EstadosProcesales { get; set; }
         public virtual DbSet<EstadosTipos> EstadosTipos { get; set; }

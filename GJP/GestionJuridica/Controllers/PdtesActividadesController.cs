@@ -18,34 +18,34 @@ namespace GestionJuridica.Controllers
     /*
     The WebApiConfig class may require additional changes to add a route for this controller. Merge these statements into the Register method of the WebApiConfig class as applicable. Note that OData URLs are case sensitive.
 
-    using System.Web.Http.OData.Builder; 
+    using System.Web.Http.OData.Builder;
     using System.Web.Http.OData.Extensions;
     using GestionJuridica.Models;
     ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
-    builder.EntitySet<Pdtes>("Pdtes");
+    builder.EntitySet<Pdtes>("PdtesActividades");
     builder.EntitySet<EstadosFormulario>("EstadosFormulario"); 
     builder.EntitySet<Formulario>("Formulario"); 
     config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
     */
-    public class PdtesController : ODataController
+    public class PdtesActividadesController : ODataController
     {
         private ModelJuridica db = new ModelJuridica();
 
-        // GET: odata/Pdtes
+        // GET: odata/PdtesActividades
         [EnableQuery]
-        public IQueryable<Pdtes> GetPdtes()
+        public IQueryable<Pdtes> GetPdtesActividades()
         {
             return db.Pdtes;
         }
 
-        // GET: odata/Pdtes(5)
+        // GET: odata/PdtesActividades(5)
         [EnableQuery]
         public SingleResult<Pdtes> GetPdtes([FromODataUri] int key)
         {
             return SingleResult.Create(db.Pdtes.Where(pdtes => pdtes.IdPdte == key));
         }
 
-        // PUT: odata/Pdtes(5)
+        // PUT: odata/PdtesActividades(5)
         public async Task<IHttpActionResult> Put([FromODataUri] int key, Delta<Pdtes> patch)
         {
             Validate(patch.GetEntity());
@@ -82,7 +82,7 @@ namespace GestionJuridica.Controllers
             return Updated(pdtes);
         }
 
-        // POST: odata/Pdtes
+        // POST: odata/PdtesActividades
         public async Task<IHttpActionResult> Post(Pdtes pdtes)
         {
             if (!ModelState.IsValid)
@@ -96,7 +96,7 @@ namespace GestionJuridica.Controllers
             return Created(pdtes);
         }
 
-        // PATCH: odata/Pdtes(5)
+        // PATCH: odata/PdtesActividades(5)
         [AcceptVerbs("PATCH", "MERGE")]
         public async Task<IHttpActionResult> Patch([FromODataUri] int key, Delta<Pdtes> patch)
         {
@@ -134,7 +134,7 @@ namespace GestionJuridica.Controllers
             return Updated(pdtes);
         }
 
-        // DELETE: odata/Pdtes(5)
+        // DELETE: odata/PdtesActividades(5)
         public async Task<IHttpActionResult> Delete([FromODataUri] int key)
         {
             Pdtes pdtes = await db.Pdtes.FindAsync(key);
@@ -149,14 +149,14 @@ namespace GestionJuridica.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // GET: odata/Pdtes(5)/EstadosFormulario
+        // GET: odata/PdtesActividades(5)/EstadosFormulario
         [EnableQuery]
         public SingleResult<EstadosFormulario> GetEstadosFormulario([FromODataUri] int key)
         {
             return SingleResult.Create(db.Pdtes.Where(m => m.IdPdte == key).Select(m => m.EstadosFormulario));
         }
 
-        // GET: odata/Pdtes(5)/Formulario
+        // GET: odata/PdtesActividades(5)/Formulario
         [EnableQuery]
         public SingleResult<Formulario> GetFormulario([FromODataUri] int key)
         {

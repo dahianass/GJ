@@ -79,24 +79,52 @@
       <HintPath>..\packages\Microsoft.ApplicationInsights.2.0.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.Azure.KeyVault.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Azure.KeyVault.Core.1.0.0\lib\net40\Microsoft.Azure.KeyVault.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.Data.Edm, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Data.Edm.5.6.0\lib\net40\Microsoft.Data.Edm.dll</HintPath>
+    <Reference Include="Microsoft.Data.Edm, Version=5.8.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Data.Edm.5.8.2\lib\net40\Microsoft.Data.Edm.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Data.OData, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Data.OData.5.6.0\lib\net40\Microsoft.Data.OData.dll</HintPath>
+    <Reference Include="Microsoft.Data.OData, Version=5.8.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Data.OData.5.8.2\lib\net40\Microsoft.Data.OData.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Data.Services.Client, Version=5.8.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Data.Services.Client.5.8.2\lib\net40\Microsoft.Data.Services.Client.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Configuration, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.WindowsAzure.ConfigurationManager.3.1.0\lib\net40\Microsoft.WindowsAzure.Configuration.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Storage, Version=8.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsAzure.Storage.8.4.0\lib\net45\Microsoft.WindowsAzure.Storage.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NLog, Version=3.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.3.0.0.0\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NLog.WindowsAzure.Configuration, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.WindowsAzure.Configuration.1.0.1\lib\net40\NLog.WindowsAzure.Configuration.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
-    <Reference Include="System.Spatial, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Spatial.5.6.0\lib\net40\System.Spatial.dll</HintPath>
+    <Reference Include="System.Spatial, Version=5.8.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Spatial.5.8.2\lib\net40\System.Spatial.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.Cors, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -150,9 +178,6 @@
     <Reference Include="System.Web.Mvc">
       <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System.Net.Http.Formatting">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
@@ -172,6 +197,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AlgoritmosController.cs" />
     <Compile Include="Controllers\AuditoriasController.cs" />
     <Compile Include="Controllers\CamposAdicionalesController.cs" />
     <Compile Include="Controllers\CamposFormulariosController.cs" />
@@ -182,23 +208,31 @@
     <Compile Include="Controllers\CircuitoesController.cs" />
     <Compile Include="Controllers\ContratosController.cs" />
     <Compile Include="Controllers\DistritoesController.cs" />
+    <Compile Include="Controllers\DocumentosController.cs" />
     <Compile Include="Controllers\EstadosFormulariosController.cs" />
     <Compile Include="Controllers\EstadosProcesalesController.cs" />
     <Compile Include="Controllers\EstadosTiposController.cs" />
+    <Compile Include="Controllers\FilesController.cs" />
     <Compile Include="Controllers\FormulariosController.cs" />
     <Compile Include="Controllers\HistoriasController.cs" />
     <Compile Include="Controllers\JuzgadoesController.cs" />
     <Compile Include="Controllers\MunicipiosController.cs" />
     <Compile Include="Controllers\NaturalezasController.cs" />
+    <Compile Include="Controllers\PdtesActividadesController.cs" />
     <Compile Include="Controllers\PdtesController.cs" />
-    <Compile Include="Controllers\PdtesReporteController.cs" />
     <Compile Include="Controllers\PersonasController.cs" />
     <Compile Include="Controllers\ProyectosController.cs" />
+    <Compile Include="Controllers\ReportesController.cs" />
     <Compile Include="Controllers\RolsController.cs" />
     <Compile Include="Controllers\smlvsController.cs" />
     <Compile Include="Controllers\TipoProcesosController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
+    <Compile Include="Dto\ChequeoDto.cs" />
+    <Compile Include="Dto\CuantiaDto.cs" />
+    <Compile Include="Dto\JuzgadosDto.cs" />
+    <Compile Include="Dto\JuzgadosLDto.cs" />
     <Compile Include="Dto\PdtesDto.cs" />
+    <Compile Include="Dto\slmlvDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -213,6 +247,7 @@
     <Compile Include="Models\Circuito.cs" />
     <Compile Include="Models\Contratos.cs" />
     <Compile Include="Models\Distrito.cs" />
+    <Compile Include="Models\Documentos.cs" />
     <Compile Include="Models\EstadosFormulario.cs" />
     <Compile Include="Models\EstadosProcesales.cs" />
     <Compile Include="Models\EstadosTipos.cs" />
@@ -250,6 +285,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Algoritmos\" />
+    <Folder Include="Views\Reportes\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
