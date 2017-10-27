@@ -9,29 +9,29 @@ namespace GestionJuridica.Models
     [Table("user")]
     public partial class user
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public user()
-        {
-            permission = new HashSet<permission>();
-        }
-
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public long id_user { get; set; }
 
         [Required]
-        [StringLength(50)]
+        [StringLength(200)]
         public string name { get; set; }
 
         [Required]
-        [StringLength(50)]
-        public string phone { get; set; }
+        [StringLength(30)]
+        public string Documento { get; set; }
 
         [Required]
         [StringLength(50)]
+        public string Cargo { get; set; }
+
+        public int IdRol { get; set; }
+
+        [StringLength(50)]
         public string email { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<permission> permission { get; set; }
+        [StringLength(50)]
+        public string Password { get; set; }
+
+        public bool Active { get; set; }
     }
 }

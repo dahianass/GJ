@@ -192,7 +192,9 @@
     <Content Include="Global.asax" />
     <Content Include="scripts\ai.0.22.9-build00167.js" />
     <Content Include="scripts\ai.0.22.9-build00167.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -220,12 +222,17 @@
     <Compile Include="Controllers\NaturalezasController.cs" />
     <Compile Include="Controllers\PdtesActividadesController.cs" />
     <Compile Include="Controllers\PdtesController.cs" />
+    <Compile Include="Controllers\permissionsController.cs" />
     <Compile Include="Controllers\PersonasController.cs" />
     <Compile Include="Controllers\ProyectosController.cs" />
     <Compile Include="Controllers\ReportesController.cs" />
+    <Compile Include="Controllers\resourcesController.cs" />
+    <Compile Include="Controllers\rolesController.cs" />
+    <Compile Include="Controllers\role_by_actionController.cs" />
     <Compile Include="Controllers\RolsController.cs" />
     <Compile Include="Controllers\smlvsController.cs" />
     <Compile Include="Controllers\TipoProcesosController.cs" />
+    <Compile Include="Controllers\usersController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Dto\ChequeoDto.cs" />
     <Compile Include="Dto\CuantiaDto.cs" />
@@ -237,6 +244,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\action.cs" />
     <Compile Include="Models\Auditoria.cs" />
     <Compile Include="Models\CamposAdicionales.cs" />
     <Compile Include="Models\CamposFormulario.cs" />
@@ -260,11 +268,16 @@
     <Compile Include="Models\Paginas.cs" />
     <Compile Include="Models\Pdtes.cs" />
     <Compile Include="Models\Permisos.cs" />
+    <Compile Include="Models\permission.cs" />
     <Compile Include="Models\Personas.cs" />
     <Compile Include="Models\Proyectos.cs" />
+    <Compile Include="Models\resource.cs" />
     <Compile Include="Models\Rol.cs" />
+    <Compile Include="Models\role.cs" />
+    <Compile Include="Models\role_by_action.cs" />
     <Compile Include="Models\smlv.cs" />
     <Compile Include="Models\TipoProcesos.cs" />
+    <Compile Include="Models\user.cs" />
     <Compile Include="Models\Usuarios.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

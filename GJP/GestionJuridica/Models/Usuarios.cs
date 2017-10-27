@@ -36,5 +36,7 @@ namespace GestionJuridica.Models
         public string Password { get; set; }
 
         public int IdRol { get; set; }
+
+        public bool Active { get; set; }
     }
 }

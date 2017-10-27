@@ -12,6 +12,7 @@ namespace GestionJuridica.Models
         {
         }
 
+        public virtual DbSet<action> action { get; set; }
         public virtual DbSet<Auditoria> Auditoria { get; set; }
         public virtual DbSet<CamposAdicionales> CamposAdicionales { get; set; }
         public virtual DbSet<CamposFormulario> CamposFormulario { get; set; }
@@ -34,15 +35,33 @@ namespace GestionJuridica.Models
         public virtual DbSet<Paginas> Paginas { get; set; }
         public virtual DbSet<Pdtes> Pdtes { get; set; }
         public virtual DbSet<Permisos> Permisos { get; set; }
+        public virtual DbSet<permission> permission { get; set; }
         public virtual DbSet<Personas> Personas { get; set; }
         public virtual DbSet<Proyectos> Proyectos { get; set; }
+        public virtual DbSet<resource> resource { get; set; }
         public virtual DbSet<Rol> Rol { get; set; }
+        public virtual DbSet<role> role { get; set; }
+        public virtual DbSet<role_by_action> role_by_action { get; set; }
         public virtual DbSet<smlv> smlv { get; set; }
+        public virtual DbSet<user> user { get; set; }
         public virtual DbSet<Usuarios> Usuarios { get; set; }
         public virtual DbSet<TipoProcesos> TipoProcesos { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<action>()
+                .Property(e => e.action1)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<action>()
+                .Property(e => e.description)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<action>()
+                .HasMany(e => e.role_by_action)
+                .WithRequired(e => e.action)
+                .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<CamposAdicionales>()
                 .HasMany(e => e.CamposFormulario)
                 .WithRequired(e => e.CamposAdicionales)
@@ -131,10 +150,46 @@ namespace GestionJuridica.Models
                 .HasForeignKey(e => e.IdProyecto)
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<resource>()
+                .Property(e => e.resource1)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<resource>()
+                .Property(e => e.description)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<resource>()
+                .HasMany(e => e.permission)
+                .WithRequired(e => e.resource)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<resource>()
+                .HasMany(e => e.resource11)
+                .WithRequired(e => e.resource2)
+                .HasForeignKey(e => e.parent);
+
             modelBuilder.Entity<Rol>()
                 .HasMany(e => e.Permisos)
                 .WithRequired(e => e.Rol)
                 .HasForeignKey(e => e.fk_IdRol)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<role>()
+                .Property(e => e.role1)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<role>()
+                .Property(e => e.description)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<role>()
+                .HasMany(e => e.permission)
+                .WithRequired(e => e.role)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<role>()
+                .HasMany(e => e.role_by_action)
+                .WithRequired(e => e.role)
                 .WillCascadeOnDelete(false);
         }
     }

@@ -21,7 +21,5 @@ namespace GestionJuridica.Models
         public virtual resource resource { get; set; }
 
         public virtual role role { get; set; }
-
-        public virtual user user { get; set; }
     }
 }

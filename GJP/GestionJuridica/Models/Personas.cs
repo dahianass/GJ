@@ -11,13 +11,16 @@ namespace GestionJuridica.Models
         [Key]
         public int IdPersona { get; set; }
 
-        [Required]
-        [StringLength(50)]
-        public string NumeroIdentidad { get; set; }
+        [StringLength(5)]
+        public string Siglas { get; set; }
 
         [Required]
         [StringLength(500)]
         public string Nombre { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        public string DocumentoIdentidad { get; set; }
 
         [Required]
         [StringLength(50)]
@@ -26,5 +29,10 @@ namespace GestionJuridica.Models
         [Required]
         [StringLength(50)]
         public string Direccion { get; set; }
+
+        [StringLength(50)]
+        public string telefono { get; set; }
+
+        public bool Active { get; set; }
     }
 }
