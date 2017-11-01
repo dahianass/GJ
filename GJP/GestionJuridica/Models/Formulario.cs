@@ -15,6 +15,8 @@ namespace GestionJuridica.Models
             CamposFormulario = new HashSet<CamposFormulario>();
             Documentos = new HashSet<Documentos>();
             EstadosFormulario = new HashSet<EstadosFormulario>();
+            EstadosFormulario1 = new HashSet<EstadosFormulario>();
+            EstadosFormulario2 = new HashSet<EstadosFormulario>();
             Historia = new HashSet<Historia>();
             Pdtes = new HashSet<Pdtes>();
         }
@@ -71,6 +73,12 @@ namespace GestionJuridica.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EstadosFormulario> EstadosFormulario { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EstadosFormulario> EstadosFormulario1 { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EstadosFormulario> EstadosFormulario2 { get; set; }
 
         public virtual Municipio Municipio { get; set; }
 

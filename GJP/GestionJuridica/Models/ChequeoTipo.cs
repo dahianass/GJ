@@ -16,6 +16,8 @@ namespace GestionJuridica.Models
 
         public int IdTiposProcesos { get; set; }
 
+        public bool Active { get; set; }
+
         public virtual Chequeo Chequeo { get; set; }
     }
 }

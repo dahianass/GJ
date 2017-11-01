@@ -15,6 +15,8 @@ namespace GestionJuridica.Models
 
         public int IdTiposProcesos { get; set; }
 
+        public bool Active { get; set; }
+
         public virtual CamposAdicionales CamposAdicionales { get; set; }
     }
 }

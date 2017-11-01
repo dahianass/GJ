@@ -39,6 +39,10 @@ namespace GestionJuridica.Models
 
         public virtual Formulario Formulario { get; set; }
 
+        public virtual Formulario Formulario1 { get; set; }
+
+        public virtual Formulario Formulario2 { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Pdtes> Pdtes { get; set; }
     }

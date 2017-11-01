@@ -43,9 +43,9 @@ namespace GestionJuridica.Models
         public virtual DbSet<role> role { get; set; }
         public virtual DbSet<role_by_action> role_by_action { get; set; }
         public virtual DbSet<smlv> smlv { get; set; }
-        public virtual DbSet<user> user { get; set; }
         public virtual DbSet<Usuarios> Usuarios { get; set; }
         public virtual DbSet<TipoProcesos> TipoProcesos { get; set; }
+        public virtual DbSet<user> user { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -111,6 +111,19 @@ namespace GestionJuridica.Models
             modelBuilder.Entity<Formulario>()
                 .HasMany(e => e.EstadosFormulario)
                 .WithRequired(e => e.Formulario)
+                .HasForeignKey(e => e.IdFormulario)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Formulario>()
+                .HasMany(e => e.EstadosFormulario1)
+                .WithRequired(e => e.Formulario1)
+                .HasForeignKey(e => e.IdFormulario)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Formulario>()
+                .HasMany(e => e.EstadosFormulario2)
+                .WithRequired(e => e.Formulario2)
+                .HasForeignKey(e => e.IdFormulario)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Formulario>()

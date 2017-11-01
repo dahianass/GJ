@@ -23,6 +23,8 @@ namespace GestionJuridica.Models
 
         public int? Terminos { get; set; }
 
+        public bool Active { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EstadosTipos> EstadosTipos { get; set; }
     }

@@ -13,8 +13,6 @@ namespace GestionJuridica.Models
 
         public int IdEstados { get; set; }
 
-        public int Posicion { get; set; }
-
         public int IdTiposProcesos { get; set; }
 
         public virtual EstadosProcesales EstadosProcesales { get; set; }
