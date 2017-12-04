@@ -14,16 +14,16 @@ namespace GestionJuridica.Controllers
         // GET: Reportes
         public JsonResult GetPdtes()
         {
-            var objResult = (from actividad in db.Pdtes
+            var objResult = from actividad in db.Pdtes
                              join formulario in db.Formulario on actividad.IdFormulario equals formulario.IdFormulario
                              join proyecto in db.Proyectos on formulario.IdProyecto equals proyecto.IdProyectos
-                             join Contrato in db.Contratos on proyecto.IdContratos equals Contrato.IdContrato
+                             join contrato in db.Contratos on proyecto.IdContratos equals contrato.IdContrato
                              join municipioP in db.Municipio on formulario.IdMunicipio equals municipioP.IdMunicipio
                              where actividad.FechaRecordatorio > DateTime.Now
                              select new PdtesDto
                              {
                                  NombreCliente = formulario.Demandado,
-                                 Contrato = Contrato.Contrato,
+                                 Contrato = contrato.CodContrato,
                                  Proyecto = proyecto.NombreProyecto,
                                  Cproceso = formulario.CodProceso,
                                  MunicipioP = municipioP.Nombre,
@@ -40,9 +40,10 @@ namespace GestionJuridica.Controllers
                                  IdFormulario = actividad.IdFormulario,
                                  Actividad = actividad.Actividad,
                                  Observacion = actividad.Observacion
-                             }).ToList();
+                             };
 
-            return Json(objResult, JsonRequestBehavior.AllowGet);
+            var objResuldt = objResult.ToList();
+            return Json(objResuldt, JsonRequestBehavior.AllowGet);
         }
 
 

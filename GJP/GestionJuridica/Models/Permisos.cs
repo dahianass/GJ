@@ -15,9 +15,7 @@ namespace GestionJuridica.Models
 
         public int IdPagina { get; set; }
 
-        public int fk_IdRol { get; set; }
-
-        public int fk_IdPagina { get; set; }
+        public bool Editar { get; set; }
 
         public virtual Paginas Paginas { get; set; }
 

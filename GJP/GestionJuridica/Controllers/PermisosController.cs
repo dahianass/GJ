@@ -6,7 +6,6 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.ModelBinding;
 using System.Web.Http.OData;
@@ -16,37 +15,37 @@ using GestionJuridica.Models;
 namespace GestionJuridica.Controllers
 {
     /*
-    The WebApiConfig class may require additional changes to add a route for this controller. Merge these statements into the Register method of the WebApiConfig class as applicable. Note that OData URLs are case sensitive.
+    Puede que la clase WebApiConfig requiera cambios adicionales para agregar una ruta para este controlador. Combine estas instrucciones en el método Register de la clase WebApiConfig según corresponda. Tenga en cuenta que las direcciones URL de OData distinguen mayúsculas de minúsculas.
 
     using System.Web.Http.OData.Builder;
     using System.Web.Http.OData.Extensions;
     using GestionJuridica.Models;
     ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
-    builder.EntitySet<role>("roles");
-    builder.EntitySet<permission>("permission"); 
-    builder.EntitySet<role_by_action>("role_by_action"); 
+    builder.EntitySet<Permisos>("Permisos");
+    builder.EntitySet<Paginas>("Paginas"); 
+    builder.EntitySet<Rol>("Rol"); 
     config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
     */
-    public class rolesController : ODataController
+    public class PermisosController : ODataController
     {
         private ModelJuridica db = new ModelJuridica();
 
-        // GET: odata/roles
+        // GET: odata/Permisos
         [EnableQuery]
-        public IQueryable<role> Getroles()
+        public IQueryable<Permisos> GetPermisos()
         {
-            return db.role;
+            return db.Permisos;
         }
 
-        // GET: odata/roles(5)
+        // GET: odata/Permisos(5)
         [EnableQuery]
-        public SingleResult<role> Getrole([FromODataUri] int key)
+        public SingleResult<Permisos> GetPermisos([FromODataUri] int key)
         {
-            return SingleResult.Create(db.role.Where(role => role.id_role == key));
+            return SingleResult.Create(db.Permisos.Where(permisos => permisos.IdPermiso == key));
         }
 
-        // PUT: odata/roles(5)
-        public async Task<IHttpActionResult> Put([FromODataUri] int key, Delta<role> patch)
+        // PUT: odata/Permisos(5)
+        public IHttpActionResult Put([FromODataUri] int key, Delta<Permisos> patch)
         {
             Validate(patch.GetEntity());
 
@@ -55,21 +54,21 @@ namespace GestionJuridica.Controllers
                 return BadRequest(ModelState);
             }
 
-            role role = await db.role.FindAsync(key);
-            if (role == null)
+            Permisos permisos = db.Permisos.Find(key);
+            if (permisos == null)
             {
                 return NotFound();
             }
 
-            patch.Put(role);
+            patch.Put(permisos);
 
             try
             {
-                await db.SaveChangesAsync();
+                db.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!roleExists(key))
+                if (!PermisosExists(key))
                 {
                     return NotFound();
                 }
@@ -79,26 +78,26 @@ namespace GestionJuridica.Controllers
                 }
             }
 
-            return Updated(role);
+            return Updated(permisos);
         }
 
-        // POST: odata/roles
-        public async Task<IHttpActionResult> Post(role role)
+        // POST: odata/Permisos
+        public IHttpActionResult Post(Permisos permisos)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.role.Add(role);
-            await db.SaveChangesAsync();
+            db.Permisos.Add(permisos);
+            db.SaveChanges();
 
-            return Created(role);
+            return Created(permisos);
         }
 
-        // PATCH: odata/roles(5)
+        // PATCH: odata/Permisos(5)
         [AcceptVerbs("PATCH", "MERGE")]
-        public async Task<IHttpActionResult> Patch([FromODataUri] int key, Delta<role> patch)
+        public IHttpActionResult Patch([FromODataUri] int key, Delta<Permisos> patch)
         {
             Validate(patch.GetEntity());
 
@@ -107,21 +106,21 @@ namespace GestionJuridica.Controllers
                 return BadRequest(ModelState);
             }
 
-            role role = await db.role.FindAsync(key);
-            if (role == null)
+            Permisos permisos = db.Permisos.Find(key);
+            if (permisos == null)
             {
                 return NotFound();
             }
 
-            patch.Patch(role);
+            patch.Patch(permisos);
 
             try
             {
-                await db.SaveChangesAsync();
+                db.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!roleExists(key))
+                if (!PermisosExists(key))
                 {
                     return NotFound();
                 }
@@ -131,36 +130,36 @@ namespace GestionJuridica.Controllers
                 }
             }
 
-            return Updated(role);
+            return Updated(permisos);
         }
 
-        // DELETE: odata/roles(5)
-        public async Task<IHttpActionResult> Delete([FromODataUri] int key)
+        // DELETE: odata/Permisos(5)
+        public IHttpActionResult Delete([FromODataUri] int key)
         {
-            role role = await db.role.FindAsync(key);
-            if (role == null)
+            Permisos permisos = db.Permisos.Find(key);
+            if (permisos == null)
             {
                 return NotFound();
             }
 
-            db.role.Remove(role);
-            await db.SaveChangesAsync();
+            db.Permisos.Remove(permisos);
+            db.SaveChanges();
 
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // GET: odata/roles(5)/permission
+        // GET: odata/Permisos(5)/Paginas
         [EnableQuery]
-        public IQueryable<permission> Getpermission([FromODataUri] int key)
+        public SingleResult<Paginas> GetPaginas([FromODataUri] int key)
         {
-            return db.role.Where(m => m.id_role == key).SelectMany(m => m.permission);
+            return SingleResult.Create(db.Permisos.Where(m => m.IdPermiso == key).Select(m => m.Paginas));
         }
 
-        // GET: odata/roles(5)/role_by_action
+        // GET: odata/Permisos(5)/Rol
         [EnableQuery]
-        public IQueryable<role_by_action> Getrole_by_action([FromODataUri] int key)
+        public SingleResult<Rol> GetRol([FromODataUri] int key)
         {
-            return db.role.Where(m => m.id_role == key).SelectMany(m => m.role_by_action);
+            return SingleResult.Create(db.Permisos.Where(m => m.IdPermiso == key).Select(m => m.Rol));
         }
 
         protected override void Dispose(bool disposing)
@@ -172,9 +171,9 @@ namespace GestionJuridica.Controllers
             base.Dispose(disposing);
         }
 
-        private bool roleExists(int key)
+        private bool PermisosExists(int key)
         {
-            return db.role.Count(e => e.id_role == key) > 0;
+            return db.Permisos.Count(e => e.IdPermiso == key) > 0;
         }
     }
 }

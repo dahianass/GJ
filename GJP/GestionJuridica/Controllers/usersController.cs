@@ -12,6 +12,8 @@ using System.Web.Http.ModelBinding;
 using System.Web.Http.OData;
 using System.Web.Http.OData.Routing;
 using GestionJuridica.Models;
+using GestionJuridica.Utilities;
+using System.Runtime.Serialization.Json;
 
 namespace GestionJuridica.Controllers
 {
@@ -27,6 +29,7 @@ namespace GestionJuridica.Controllers
     */
     public class usersController : ODataController
     {
+        Encrypt objEncrypet = new Encrypt();
         private ModelJuridica db = new ModelJuridica();
 
         // GET: odata/users
@@ -83,14 +86,23 @@ namespace GestionJuridica.Controllers
         // POST: odata/users
         public async Task<IHttpActionResult> Post(user user)
         {
+            Rpta objRespta = new Rpta();
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-
-            db.user.Add(user);
-            await db.SaveChangesAsync();
-
+            user.Password = Encrypt.EncryptD(user.Password);
+            var userB = db.user.Where(us => us.email == user.email).FirstOrDefault();
+            
+            if (userB == null)
+            {
+                db.user.Add(user);
+                await db.SaveChangesAsync();
+            }
+            else {
+                user.id_user = 0;
+                user.name = "Usuario ya existe";
+            }
             return Created(user);
         }
 

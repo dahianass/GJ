@@ -17,6 +17,12 @@ namespace GestionJuridica.Models
 
         public int IdFormulario { get; set; }
 
+        public string Nombre { get; set; }
+
+        public string Cargo { get; set; }
+
+        public string Correo { get; set; }
+
         [Required]
         public string Observacion { get; set; }
 

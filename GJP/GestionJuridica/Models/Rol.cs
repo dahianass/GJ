@@ -22,6 +22,8 @@ namespace GestionJuridica.Models
         [StringLength(50)]
         public string Nombre { get; set; }
 
+        public bool Activo { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Permisos> Permisos { get; set; }
     }

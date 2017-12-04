@@ -52,9 +52,9 @@ namespace GestionJuridica
             builder.EntitySet<Documentos>("Documentos");
             builder.EntitySet<user>("users");
             builder.EntitySet<resource>("resources");
-            builder.EntitySet<permission>("permission");
-            builder.EntitySet<role>("roles");
-            builder.EntitySet<role_by_action>("role_by_action");
+            builder.EntitySet<Rol>("Rols");
+            builder.EntitySet<Paginas>("Paginas");
+            builder.EntitySet<Permisos>("Permisos");
             config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
         }
     }

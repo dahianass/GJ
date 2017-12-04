@@ -218,28 +218,32 @@
     <Compile Include="Controllers\FormulariosController.cs" />
     <Compile Include="Controllers\HistoriasController.cs" />
     <Compile Include="Controllers\JuzgadoesController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MunicipiosController.cs" />
     <Compile Include="Controllers\NaturalezasController.cs" />
+    <Compile Include="Controllers\PaginasController.cs" />
     <Compile Include="Controllers\PdtesActividadesController.cs" />
     <Compile Include="Controllers\PdtesController.cs" />
-    <Compile Include="Controllers\permissionsController.cs" />
+    <Compile Include="Controllers\PermisosController.cs" />
     <Compile Include="Controllers\PersonasController.cs" />
     <Compile Include="Controllers\ProyectosController.cs" />
     <Compile Include="Controllers\ReportesController.cs" />
     <Compile Include="Controllers\resourcesController.cs" />
-    <Compile Include="Controllers\rolesController.cs" />
-    <Compile Include="Controllers\role_by_actionController.cs" />
     <Compile Include="Controllers\RolsController.cs" />
     <Compile Include="Controllers\smlvsController.cs" />
     <Compile Include="Controllers\TipoProcesosController.cs" />
     <Compile Include="Controllers\usersController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
-    <Compile Include="Dto\ChequeoDto.cs" />
-    <Compile Include="Dto\CuantiaDto.cs" />
-    <Compile Include="Dto\JuzgadosDto.cs" />
-    <Compile Include="Dto\JuzgadosLDto.cs" />
-    <Compile Include="Dto\PdtesDto.cs" />
-    <Compile Include="Dto\slmlvDto.cs" />
+    <Compile Include="Utilities\ChequeoDto.cs" />
+    <Compile Include="Utilities\CuantiaDto.cs" />
+    <Compile Include="Utilities\Encrypt.cs" />
+    <Compile Include="Utilities\JuzgadosDto.cs" />
+    <Compile Include="Utilities\JuzgadosLDto.cs" />
+    <Compile Include="Utilities\MenuDto.cs" />
+    <Compile Include="Utilities\PdtesDto.cs" />
+    <Compile Include="Utilities\PermisosDto.cs" />
+    <Compile Include="Utilities\Rpta.cs" />
+    <Compile Include="Utilities\slmlvDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -287,7 +291,9 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Properties\PublishProfiles\GestionJuridica - FTP %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\GestionJuridica - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\GestionJuridica - Web Deploy %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\GestionJuridica - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\JuridicaQA - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\JuridicaQA - Web Deploy.pubxml" />
@@ -301,6 +307,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Algoritmos\" />
+    <Folder Include="Views\Login\" />
     <Folder Include="Views\Reportes\" />
   </ItemGroup>
   <ItemGroup>

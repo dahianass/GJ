@@ -154,7 +154,7 @@ namespace GestionJuridica.Models
             modelBuilder.Entity<Paginas>()
                 .HasMany(e => e.Permisos)
                 .WithRequired(e => e.Paginas)
-                .HasForeignKey(e => e.fk_IdPagina)
+                .HasForeignKey(e => e.IdPagina)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Proyectos>()
@@ -184,7 +184,7 @@ namespace GestionJuridica.Models
             modelBuilder.Entity<Rol>()
                 .HasMany(e => e.Permisos)
                 .WithRequired(e => e.Rol)
-                .HasForeignKey(e => e.fk_IdRol)
+                .HasForeignKey(e => e.IdRol)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<role>()

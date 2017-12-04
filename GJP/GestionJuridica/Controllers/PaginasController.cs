@@ -21,30 +21,30 @@ namespace GestionJuridica.Controllers
     using System.Web.Http.OData.Extensions;
     using GestionJuridica.Models;
     ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
-    builder.EntitySet<Rol>("Rols");
+    builder.EntitySet<Paginas>("Paginas");
     builder.EntitySet<Permisos>("Permisos"); 
     config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
     */
-    public class RolsController : ODataController
+    public class PaginasController : ODataController
     {
         private ModelJuridica db = new ModelJuridica();
 
-        // GET: odata/Rols
+        // GET: odata/Paginas
         [EnableQuery]
-        public IQueryable<Rol> GetRols()
+        public IQueryable<Paginas> GetPaginas()
         {
-            return db.Rol;
+            return db.Paginas;
         }
 
-        // GET: odata/Rols(5)
+        // GET: odata/Paginas(5)
         [EnableQuery]
-        public SingleResult<Rol> GetRol([FromODataUri] int key)
+        public SingleResult<Paginas> GetPaginas([FromODataUri] int key)
         {
-            return SingleResult.Create(db.Rol.Where(rol => rol.IdRol == key));
+            return SingleResult.Create(db.Paginas.Where(paginas => paginas.IdPagina == key));
         }
 
-        // PUT: odata/Rols(5)
-        public IHttpActionResult Put([FromODataUri] int key, Delta<Rol> patch)
+        // PUT: odata/Paginas(5)
+        public IHttpActionResult Put([FromODataUri] int key, Delta<Paginas> patch)
         {
             Validate(patch.GetEntity());
 
@@ -53,13 +53,13 @@ namespace GestionJuridica.Controllers
                 return BadRequest(ModelState);
             }
 
-            Rol rol = db.Rol.Find(key);
-            if (rol == null)
+            Paginas paginas = db.Paginas.Find(key);
+            if (paginas == null)
             {
                 return NotFound();
             }
 
-            patch.Put(rol);
+            patch.Put(paginas);
 
             try
             {
@@ -67,7 +67,7 @@ namespace GestionJuridica.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!RolExists(key))
+                if (!PaginasExists(key))
                 {
                     return NotFound();
                 }
@@ -77,26 +77,26 @@ namespace GestionJuridica.Controllers
                 }
             }
 
-            return Updated(rol);
+            return Updated(paginas);
         }
 
-        // POST: odata/Rols
-        public IHttpActionResult Post(Rol rol)
+        // POST: odata/Paginas
+        public IHttpActionResult Post(Paginas paginas)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Rol.Add(rol);
+            db.Paginas.Add(paginas);
             db.SaveChanges();
 
-            return Created(rol);
+            return Created(paginas);
         }
 
-        // PATCH: odata/Rols(5)
+        // PATCH: odata/Paginas(5)
         [AcceptVerbs("PATCH", "MERGE")]
-        public IHttpActionResult Patch([FromODataUri] int key, Delta<Rol> patch)
+        public IHttpActionResult Patch([FromODataUri] int key, Delta<Paginas> patch)
         {
             Validate(patch.GetEntity());
 
@@ -105,13 +105,13 @@ namespace GestionJuridica.Controllers
                 return BadRequest(ModelState);
             }
 
-            Rol rol = db.Rol.Find(key);
-            if (rol == null)
+            Paginas paginas = db.Paginas.Find(key);
+            if (paginas == null)
             {
                 return NotFound();
             }
 
-            patch.Patch(rol);
+            patch.Patch(paginas);
 
             try
             {
@@ -119,7 +119,7 @@ namespace GestionJuridica.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!RolExists(key))
+                if (!PaginasExists(key))
                 {
                     return NotFound();
                 }
@@ -129,29 +129,29 @@ namespace GestionJuridica.Controllers
                 }
             }
 
-            return Updated(rol);
+            return Updated(paginas);
         }
 
-        // DELETE: odata/Rols(5)
+        // DELETE: odata/Paginas(5)
         public IHttpActionResult Delete([FromODataUri] int key)
         {
-            Rol rol = db.Rol.Find(key);
-            if (rol == null)
+            Paginas paginas = db.Paginas.Find(key);
+            if (paginas == null)
             {
                 return NotFound();
             }
 
-            db.Rol.Remove(rol);
+            db.Paginas.Remove(paginas);
             db.SaveChanges();
 
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // GET: odata/Rols(5)/Permisos
+        // GET: odata/Paginas(5)/Permisos
         [EnableQuery]
         public IQueryable<Permisos> GetPermisos([FromODataUri] int key)
         {
-            return db.Rol.Where(m => m.IdRol == key).SelectMany(m => m.Permisos);
+            return db.Paginas.Where(m => m.IdPagina == key).SelectMany(m => m.Permisos);
         }
 
         protected override void Dispose(bool disposing)
@@ -163,9 +163,9 @@ namespace GestionJuridica.Controllers
             base.Dispose(disposing);
         }
 
-        private bool RolExists(int key)
+        private bool PaginasExists(int key)
         {
-            return db.Rol.Count(e => e.IdRol == key) > 0;
+            return db.Paginas.Count(e => e.IdPagina == key) > 0;
         }
     }
 }

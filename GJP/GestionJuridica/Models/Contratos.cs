@@ -20,12 +20,16 @@ namespace GestionJuridica.Models
         public int IdPersona { get; set; }
 
         [Required]
-        [StringLength(500)]
-        public string Contrato { get; set; }
+        [StringLength(10)]
+        public string CodContrato { get; set; }
 
         [Required]
         [StringLength(500)]
-        public string Descripcion { get; set; }
+        public string Nombre { get; set; }
+
+        [Required]
+        [StringLength(500)]
+        public string NroInterno { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Proyectos> Proyectos { get; set; }

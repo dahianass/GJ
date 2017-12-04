@@ -18,5 +18,7 @@ namespace GestionJuridica.Models
 
         [Column(Order = 2)]
         public bool Active { get; set; }
+
+        public int? IdNaturaleza { get; set; }
     }
 }
