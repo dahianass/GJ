@@ -7,6 +7,7 @@ namespace GestionJuridica.Utilities
 {
 	public class Rpta
 	{
+        public int status { get; set; }
         public bool error { get; set; }
         public string message { get; set; }
         public string answer { get; set; }

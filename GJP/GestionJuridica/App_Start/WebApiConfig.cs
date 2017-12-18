@@ -42,19 +42,19 @@ namespace GestionJuridica
             builder.EntitySet<Contratos>("Contratos");
             builder.EntitySet<Formulario>("Formularios");
             builder.EntitySet<EstadosFormulario>("EstadosFormularios");
-            builder.EntitySet<Historia>("Historias");
             builder.EntitySet<ChequeoFormulario>("ChequeoFormularios");
             builder.EntitySet<Auditoria>("Auditorias");
             builder.EntitySet<Naturaleza>("Naturalezas");
             builder.EntitySet<smlv>("smlvs");
             builder.EntitySet<CamposFormulario>("CamposFormularios");
-            builder.EntitySet<Pdtes>("PdtesActividades");
             builder.EntitySet<Documentos>("Documentos");
             builder.EntitySet<user>("users");
             builder.EntitySet<resource>("resources");
             builder.EntitySet<Rol>("Rols");
             builder.EntitySet<Paginas>("Paginas");
             builder.EntitySet<Permisos>("Permisos");
+            builder.EntitySet<Pdtes>("PdtesActividades");
+            builder.EntitySet<Historia>("Historias");
             config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
         }
     }

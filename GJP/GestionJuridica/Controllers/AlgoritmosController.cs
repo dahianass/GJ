@@ -1,5 +1,6 @@
 ﻿using GestionJuridica.Dto;
 using GestionJuridica.Models;
+using GestionJuridica.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -105,7 +106,7 @@ namespace GestionJuridica.Controllers
                                      IdMunicipio = Juzg.IdMunicipio,
                                      CircuitoV = Juzg.Circuito,
                                      Juez = Juzg.Juez,
-                                     Juzgado = Juzg.Juzgado1,
+                                     Juzgado = Juzg.NombreJuzgado,
                                      idNaturaleza = Juzg.IdNaturaleza,
                                      Naturaleza = natura.Nombre,
                                  }).ToList();
@@ -129,7 +130,7 @@ namespace GestionJuridica.Controllers
                                      IdMunicipio = Juzg.IdMunicipio,
                                      CircuitoV = Juzg.Circuito,
                                      Juez = Juzg.Juez,
-                                     Juzgado = Juzg.Juzgado1,
+                                     Juzgado = Juzg.NombreJuzgado,
                                      idNaturaleza = Juzg.IdNaturaleza,
                                      Naturaleza = natura.Nombre,
                                  }).ToList();

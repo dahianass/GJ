@@ -6,7 +6,6 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.ModelBinding;
 using System.Web.Http.OData;
@@ -16,14 +15,13 @@ using GestionJuridica.Models;
 namespace GestionJuridica.Controllers
 {
     /*
-    The WebApiConfig class may require additional changes to add a route for this controller. Merge these statements into the Register method of the WebApiConfig class as applicable. Note that OData URLs are case sensitive.
+    Puede que la clase WebApiConfig requiera cambios adicionales para agregar una ruta para este controlador. Combine estas instrucciones en el método Register de la clase WebApiConfig según corresponda. Tenga en cuenta que las direcciones URL de OData distinguen mayúsculas de minúsculas.
 
     using System.Web.Http.OData.Builder;
     using System.Web.Http.OData.Extensions;
     using GestionJuridica.Models;
     ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
     builder.EntitySet<Pdtes>("PdtesActividades");
-    builder.EntitySet<EstadosFormulario>("EstadosFormulario"); 
     builder.EntitySet<Formulario>("Formulario"); 
     config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
     */
@@ -46,7 +44,7 @@ namespace GestionJuridica.Controllers
         }
 
         // PUT: odata/PdtesActividades(5)
-        public async Task<IHttpActionResult> Put([FromODataUri] int key, Delta<Pdtes> patch)
+        public IHttpActionResult Put([FromODataUri] int key, Delta<Pdtes> patch)
         {
             Validate(patch.GetEntity());
 
@@ -55,7 +53,7 @@ namespace GestionJuridica.Controllers
                 return BadRequest(ModelState);
             }
 
-            Pdtes pdtes = await db.Pdtes.FindAsync(key);
+            Pdtes pdtes = db.Pdtes.Find(key);
             if (pdtes == null)
             {
                 return NotFound();
@@ -65,7 +63,7 @@ namespace GestionJuridica.Controllers
 
             try
             {
-                await db.SaveChangesAsync();
+                db.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -83,7 +81,7 @@ namespace GestionJuridica.Controllers
         }
 
         // POST: odata/PdtesActividades
-        public async Task<IHttpActionResult> Post(Pdtes pdtes)
+        public IHttpActionResult Post(Pdtes pdtes)
         {
             if (!ModelState.IsValid)
             {
@@ -91,14 +89,14 @@ namespace GestionJuridica.Controllers
             }
 
             db.Pdtes.Add(pdtes);
-            await db.SaveChangesAsync();
+            db.SaveChanges();
 
             return Created(pdtes);
         }
 
         // PATCH: odata/PdtesActividades(5)
         [AcceptVerbs("PATCH", "MERGE")]
-        public async Task<IHttpActionResult> Patch([FromODataUri] int key, Delta<Pdtes> patch)
+        public IHttpActionResult Patch([FromODataUri] int key, Delta<Pdtes> patch)
         {
             Validate(patch.GetEntity());
 
@@ -107,7 +105,7 @@ namespace GestionJuridica.Controllers
                 return BadRequest(ModelState);
             }
 
-            Pdtes pdtes = await db.Pdtes.FindAsync(key);
+            Pdtes pdtes = db.Pdtes.Find(key);
             if (pdtes == null)
             {
                 return NotFound();
@@ -117,7 +115,7 @@ namespace GestionJuridica.Controllers
 
             try
             {
-                await db.SaveChangesAsync();
+                db.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -135,25 +133,18 @@ namespace GestionJuridica.Controllers
         }
 
         // DELETE: odata/PdtesActividades(5)
-        public async Task<IHttpActionResult> Delete([FromODataUri] int key)
+        public IHttpActionResult Delete([FromODataUri] int key)
         {
-            Pdtes pdtes = await db.Pdtes.FindAsync(key);
+            Pdtes pdtes = db.Pdtes.Find(key);
             if (pdtes == null)
             {
                 return NotFound();
             }
 
             db.Pdtes.Remove(pdtes);
-            await db.SaveChangesAsync();
+            db.SaveChanges();
 
             return StatusCode(HttpStatusCode.NoContent);
-        }
-
-        // GET: odata/PdtesActividades(5)/EstadosFormulario
-        [EnableQuery]
-        public SingleResult<EstadosFormulario> GetEstadosFormulario([FromODataUri] int key)
-        {
-            return SingleResult.Create(db.Pdtes.Where(m => m.IdPdte == key).Select(m => m.EstadosFormulario));
         }
 
         // GET: odata/PdtesActividades(5)/Formulario

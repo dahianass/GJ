@@ -8,19 +8,21 @@ namespace GestionJuridica.Models
 
     public partial class Pdtes
     {
-        [Key]
-        public int IdPdte { get; set; }
+                public int IdPdte { get; set; }
 
         public int IdUsuario { get; set; }
 
-        public int? IdEstadoFormulario { get; set; }
+        [StringLength(50)]
+        public string Nombre { get; set; }
+
+        [StringLength(50)]
+        public string Cargo { get; set; }
+
+        public int? IdEstado { get; set; }
 
         public int IdFormulario { get; set; }
 
-        public string Nombre { get; set; }
-
-        public string Cargo { get; set; }
-
+        [StringLength(500)]
         public string Correo { get; set; }
 
         [Required]
@@ -33,8 +35,6 @@ namespace GestionJuridica.Models
         public DateTime FechaCreacion { get; set; }
 
         public DateTime FechaRecordatorio { get; set; }
-
-        public virtual EstadosFormulario EstadosFormulario { get; set; }
 
         public virtual Formulario Formulario { get; set; }
     }

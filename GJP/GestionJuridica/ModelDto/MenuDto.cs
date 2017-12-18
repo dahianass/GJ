@@ -10,6 +10,8 @@ namespace GestionJuridica.Utilities
         public long id_user { get; set; }
         public string Password { get; set; }
         public int IdRol { get; set; }
+        public string Nombre { get; set; }     
+        public string Cargo { get; set; }
         public List<PermisosDto> permisos { get; set; }
         
     }

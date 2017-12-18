@@ -221,9 +221,9 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MunicipiosController.cs" />
     <Compile Include="Controllers\NaturalezasController.cs" />
+    <Compile Include="Controllers\ObjectosController.cs" />
     <Compile Include="Controllers\PaginasController.cs" />
     <Compile Include="Controllers\PdtesActividadesController.cs" />
-    <Compile Include="Controllers\PdtesController.cs" />
     <Compile Include="Controllers\PermisosController.cs" />
     <Compile Include="Controllers\PersonasController.cs" />
     <Compile Include="Controllers\ProyectosController.cs" />
@@ -234,16 +234,19 @@
     <Compile Include="Controllers\TipoProcesosController.cs" />
     <Compile Include="Controllers\usersController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
-    <Compile Include="Utilities\ChequeoDto.cs" />
-    <Compile Include="Utilities\CuantiaDto.cs" />
+    <Compile Include="Data\PermisosDta.cs" />
+    <Compile Include="ModelDto\ChequeoDto.cs" />
+    <Compile Include="ModelDto\CuantiaDto.cs" />
     <Compile Include="Utilities\Encrypt.cs" />
-    <Compile Include="Utilities\JuzgadosDto.cs" />
-    <Compile Include="Utilities\JuzgadosLDto.cs" />
-    <Compile Include="Utilities\MenuDto.cs" />
-    <Compile Include="Utilities\PdtesDto.cs" />
-    <Compile Include="Utilities\PermisosDto.cs" />
-    <Compile Include="Utilities\Rpta.cs" />
-    <Compile Include="Utilities\slmlvDto.cs" />
+    <Compile Include="ModelDto\JuzgadosDto.cs" />
+    <Compile Include="ModelDto\JuzgadosLDto.cs" />
+    <Compile Include="ModelDto\ListPermisosDto.cs" />
+    <Compile Include="ModelDto\MenuDto.cs" />
+    <Compile Include="ModelDto\PdtesDto.cs" />
+    <Compile Include="ModelDto\PermisosDto.cs" />
+    <Compile Include="ModelDto\procesosDto.cs" />
+    <Compile Include="ModelDto\Rpta.cs" />
+    <Compile Include="ModelDto\slmlvDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -292,8 +295,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Properties\PublishProfiles\GestionJuridica - FTP %282%29.pubxml" />
+    <None Include="Properties\PublishProfiles\GestionJuridica - FTP %283%29.pubxml" />
     <None Include="Properties\PublishProfiles\GestionJuridica - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\GestionJuridica - Web Deploy %282%29.pubxml" />
+    <None Include="Properties\PublishProfiles\GestionJuridica - Web Deploy %283%29.pubxml" />
     <None Include="Properties\PublishProfiles\GestionJuridica - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\JuridicaQA - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\JuridicaQA - Web Deploy.pubxml" />
@@ -308,6 +313,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Views\Algoritmos\" />
     <Folder Include="Views\Login\" />
+    <Folder Include="Views\Objectos\" />
     <Folder Include="Views\Reportes\" />
   </ItemGroup>
   <ItemGroup>

@@ -14,7 +14,10 @@ namespace GestionJuridica.Models
 
         public int IdUsuario { get; set; }
 
-        public int? IdEstadoFormulario { get; set; }
+        public string Nombre { get; set; }
+
+        [Column("IdEstadoFormulario")]
+        public int? IdEstado { get; set; }
 
         public int IdFormulario { get; set; }
 

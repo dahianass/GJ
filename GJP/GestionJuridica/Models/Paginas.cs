@@ -21,8 +21,6 @@ namespace GestionJuridica.Models
         [StringLength(20)]
         public string Nombre { get; set; }
 
-        public bool Editar { get; set; }
-
         [Required]
         [StringLength(500)]
         public string Descripcion { get; set; }

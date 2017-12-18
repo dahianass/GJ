@@ -19,15 +19,19 @@ namespace GestionJuridica.Models
 
         public int IdContratos { get; set; }
 
+
+        [Required]
+        [StringLength(50)]
+        public string CodigoProyecto { get; set; }
+        
+
         [Required]
         [StringLength(50)]
         public string NombreProyecto { get; set; }
 
-        [StringLength(500)]
-        public string Interventor { get; set; }
+        public int Interventor { get; set; }
 
-        [StringLength(500)]
-        public string Representador { get; set; }
+        public int Representador { get; set; }
 
         public virtual Contratos Contratos { get; set; }
 

@@ -22,7 +22,7 @@ namespace GestionJuridica.Models
         [Column("Juzgado")]
         [Required]
         [StringLength(200)]
-        public string Juzgado1 { get; set; }
+        public string NombreJuzgado { get; set; }
 
         public int IdNaturaleza { get; set; }
 

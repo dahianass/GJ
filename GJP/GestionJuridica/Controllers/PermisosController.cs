@@ -11,6 +11,7 @@ using System.Web.Http.ModelBinding;
 using System.Web.Http.OData;
 using System.Web.Http.OData.Routing;
 using GestionJuridica.Models;
+using GestionJuridica.Utilities;
 
 namespace GestionJuridica.Controllers
 {
