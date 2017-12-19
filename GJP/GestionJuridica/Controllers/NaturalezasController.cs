@@ -148,12 +148,12 @@ namespace GestionJuridica.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // GET: odata/Naturalezas(5)/Juzgado
-        [EnableQuery]
-        public IQueryable<Juzgado> GetJuzgado([FromODataUri] int key)
-        {
-            return db.Naturaleza.Where(m => m.IdNaturaleza == key).SelectMany(m => m.Juzgado);
-        }
+        //// GET: odata/Naturalezas(5)/Juzgado
+        //[EnableQuery]
+        //public IQueryable<Juzgado> GetJuzgado([FromODataUri] int key)
+        //{
+        //    return db.Naturaleza.Where(m => m.IdNaturaleza == key).SelectMany(m => m.Juzgado);
+        //}
 
         protected override void Dispose(bool disposing)
         {

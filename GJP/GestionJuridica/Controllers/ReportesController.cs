@@ -33,7 +33,7 @@ namespace GestionJuridica.Controllers
                                  Demandante = formulario.Demandante,
                                  Demandado = formulario.Demandado,
                                  Estadoprocesal = (from Ef in db.EstadosFormulario
-                                                   join EstadosProcesalesF in db.EstadosProcesales on Ef.IdEstadoProcesal equals EstadosProcesalesF.IdEstados
+                                                   join EstadosProcesalesF in db.EstadosProcesales on Ef.IdEstados equals EstadosProcesalesF.IdEstados
                                                    where Ef.IdEstadoFormulario == formulario.IdFormulario
                                                    orderby Ef.FechaCumplimiento
                                                    select EstadosProcesalesF.Nombre).FirstOrDefault(),
@@ -69,7 +69,7 @@ namespace GestionJuridica.Controllers
                                 Demandado = formulario.Demandado,
                                 tipoProceso = Tproceso.Nombre,
                                 Estadoprocesal = (from Ef in db.EstadosFormulario
-                                                  join EstadosProcesalesF in db.EstadosProcesales on Ef.IdEstadoProcesal equals EstadosProcesalesF.IdEstados
+                                                  join EstadosProcesalesF in db.EstadosProcesales on Ef.IdEstados equals EstadosProcesalesF.IdEstados
                                                   where Ef.IdEstadoFormulario == formulario.IdFormulario
                                                   orderby Ef.FechaCumplimiento
                                                   select EstadosProcesalesF.Nombre).FirstOrDefault(),
@@ -105,7 +105,7 @@ namespace GestionJuridica.Controllers
                                 Demandado = formulario.Demandado,
                                 tipoProceso = Tproceso.Nombre,
                                 Estadoprocesal = (from Ef in db.EstadosFormulario
-                                                  join EstadosProcesalesF in db.EstadosProcesales on Ef.IdEstadoProcesal equals EstadosProcesalesF.IdEstados
+                                                  join EstadosProcesalesF in db.EstadosProcesales on Ef.IdEstados equals EstadosProcesalesF.IdEstados
                                                   where Ef.IdEstadoFormulario == formulario.IdFormulario
                                                   orderby Ef.FechaCumplimiento
                                                   select EstadosProcesalesF.Nombre).FirstOrDefault(),

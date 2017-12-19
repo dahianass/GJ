@@ -13,6 +13,11 @@ namespace GestionJuridica.Models
         public Chequeo()
         {
             ChequeoTipo = new HashSet<ChequeoTipo>();
+            ChequeoTipo1 = new HashSet<ChequeoTipo>();
+            ChequeoTipo2 = new HashSet<ChequeoTipo>();
+            ChequeoTipo3 = new HashSet<ChequeoTipo>();
+            ChequeoTipo4 = new HashSet<ChequeoTipo>();
+            ChequeoTipo5 = new HashSet<ChequeoTipo>();
         }
 
         [Key]
@@ -24,5 +29,20 @@ namespace GestionJuridica.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChequeoTipo> ChequeoTipo { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ChequeoTipo> ChequeoTipo1 { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ChequeoTipo> ChequeoTipo2 { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ChequeoTipo> ChequeoTipo3 { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ChequeoTipo> ChequeoTipo4 { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ChequeoTipo> ChequeoTipo5 { get; set; }
     }
 }

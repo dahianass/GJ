@@ -149,12 +149,12 @@ namespace GestionJuridica.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // GET: odata/EstadosFormularios(5)/ChequeoFormulario
-        [EnableQuery]
-        public IQueryable<ChequeoFormulario> GetChequeoFormulario([FromODataUri] int key)
-        {
-            return db.EstadosFormulario.Where(m => m.IdEstadoFormulario == key).SelectMany(m => m.ChequeoFormulario);
-        }
+        //// GET: odata/EstadosFormularios(5)/ChequeoFormulario
+        //[EnableQuery]
+        //public IQueryable<ChequeoFormulario> GetChequeoFormulario([FromODataUri] int key)
+        //{
+        //    return db.EstadosFormulario.Where(m => m.IdEstadoFormulario == key).SelectMany(m => m.ChequeoFormulario);
+        //}
 
         // GET: odata/EstadosFormularios(5)/Formulario
         [EnableQuery]

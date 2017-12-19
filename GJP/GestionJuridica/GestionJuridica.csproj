@@ -237,20 +237,6 @@
     <Compile Include="Data\PermisosDta.cs" />
     <Compile Include="ModelDto\ChequeoDto.cs" />
     <Compile Include="ModelDto\CuantiaDto.cs" />
-    <Compile Include="Utilities\Encrypt.cs" />
-    <Compile Include="ModelDto\JuzgadosDto.cs" />
-    <Compile Include="ModelDto\JuzgadosLDto.cs" />
-    <Compile Include="ModelDto\ListPermisosDto.cs" />
-    <Compile Include="ModelDto\MenuDto.cs" />
-    <Compile Include="ModelDto\PdtesDto.cs" />
-    <Compile Include="ModelDto\PermisosDto.cs" />
-    <Compile Include="ModelDto\procesosDto.cs" />
-    <Compile Include="ModelDto\Rpta.cs" />
-    <Compile Include="ModelDto\slmlvDto.cs" />
-    <Compile Include="Global.asax.cs">
-      <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\action.cs" />
     <Compile Include="Models\Auditoria.cs" />
     <Compile Include="Models\CamposAdicionales.cs" />
@@ -281,11 +267,24 @@
     <Compile Include="Models\resource.cs" />
     <Compile Include="Models\Rol.cs" />
     <Compile Include="Models\role.cs" />
-    <Compile Include="Models\role_by_action.cs" />
     <Compile Include="Models\smlv.cs" />
     <Compile Include="Models\TipoProcesos.cs" />
     <Compile Include="Models\user.cs" />
     <Compile Include="Models\Usuarios.cs" />
+    <Compile Include="Utilities\Encrypt.cs" />
+    <Compile Include="ModelDto\JuzgadosDto.cs" />
+    <Compile Include="ModelDto\JuzgadosLDto.cs" />
+    <Compile Include="ModelDto\ListPermisosDto.cs" />
+    <Compile Include="ModelDto\MenuDto.cs" />
+    <Compile Include="ModelDto\PdtesDto.cs" />
+    <Compile Include="ModelDto\PermisosDto.cs" />
+    <Compile Include="ModelDto\procesosDto.cs" />
+    <Compile Include="ModelDto\Rpta.cs" />
+    <Compile Include="ModelDto\slmlvDto.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -318,6 +317,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

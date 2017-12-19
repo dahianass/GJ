@@ -21,6 +21,26 @@ namespace GestionJuridica.Models
 
         public virtual EstadosFormulario EstadosFormulario { get; set; }
 
+        public virtual EstadosFormulario EstadosFormulario1 { get; set; }
+
+        public virtual EstadosFormulario EstadosFormulario2 { get; set; }
+
+        public virtual EstadosFormulario EstadosFormulario3 { get; set; }
+
+        public virtual EstadosFormulario EstadosFormulario4 { get; set; }
+
+        public virtual EstadosFormulario EstadosFormulario5 { get; set; }
+
         public virtual Formulario Formulario { get; set; }
+
+        public virtual Formulario Formulario1 { get; set; }
+
+        public virtual Formulario Formulario2 { get; set; }
+
+        public virtual Formulario Formulario3 { get; set; }
+
+        public virtual Formulario Formulario4 { get; set; }
+
+        public virtual Formulario Formulario5 { get; set; }
     }
 }

@@ -13,6 +13,11 @@ namespace GestionJuridica.Models
         public Distrito()
         {
             Circuito = new HashSet<Circuito>();
+            Circuito1 = new HashSet<Circuito>();
+            Circuito2 = new HashSet<Circuito>();
+            Circuito3 = new HashSet<Circuito>();
+            Circuito4 = new HashSet<Circuito>();
+            Circuito5 = new HashSet<Circuito>();
         }
 
         [Key]
@@ -24,5 +29,20 @@ namespace GestionJuridica.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Circuito> Circuito { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Circuito> Circuito1 { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Circuito> Circuito2 { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Circuito> Circuito3 { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Circuito> Circuito4 { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Circuito> Circuito5 { get; set; }
     }
 }

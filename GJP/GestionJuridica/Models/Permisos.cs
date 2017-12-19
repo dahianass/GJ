@@ -11,9 +11,9 @@ namespace GestionJuridica.Models
         [Key]
         public int IdPermiso { get; set; }
 
-        public int IdRol { get; set; }
+        public int? IdRol { get; set; }
 
-        public int IdPagina { get; set; }
+        public int? IdPagina { get; set; }
 
         public bool Editar { get; set; }
 

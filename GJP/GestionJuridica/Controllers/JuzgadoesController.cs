@@ -156,12 +156,12 @@ namespace GestionJuridica.Controllers
             return SingleResult.Create(db.Juzgado.Where(m => m.IdJuzgado == key).Select(m => m.Municipio));
         }
 
-        // GET: odata/Juzgadoes(5)/Naturaleza
-        [EnableQuery]
-        public SingleResult<Naturaleza> GetNaturaleza([FromODataUri] int key)
-        {
-            return SingleResult.Create(db.Juzgado.Where(m => m.IdJuzgado == key).Select(m => m.Naturaleza));
-        }
+        //// GET: odata/Juzgadoes(5)/Naturaleza
+        //[EnableQuery]
+        //public SingleResult<Naturaleza> GetNaturaleza([FromODataUri] int key)
+        //{
+        //    return SingleResult.Create(db.Juzgado.Where(m => m.IdJuzgado == key).Select(m => m.IdNaturaleza));
+        //}
 
         protected override void Dispose(bool disposing)
         {

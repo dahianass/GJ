@@ -12,6 +12,11 @@ namespace GestionJuridica.Models
         public EstadosProcesales()
         {
             EstadosTipos = new HashSet<EstadosTipos>();
+            EstadosTipos1 = new HashSet<EstadosTipos>();
+            EstadosTipos2 = new HashSet<EstadosTipos>();
+            EstadosTipos3 = new HashSet<EstadosTipos>();
+            EstadosTipos4 = new HashSet<EstadosTipos>();
+            EstadosTipos5 = new HashSet<EstadosTipos>();
         }
 
         [Key]
@@ -27,5 +32,20 @@ namespace GestionJuridica.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EstadosTipos> EstadosTipos { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EstadosTipos> EstadosTipos1 { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EstadosTipos> EstadosTipos2 { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EstadosTipos> EstadosTipos3 { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EstadosTipos> EstadosTipos4 { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EstadosTipos> EstadosTipos5 { get; set; }
     }
 }

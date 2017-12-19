@@ -12,10 +12,8 @@ namespace GestionJuridica.Models
         [Key]
         public int IdCheqeoF { get; set; }
 
-        public int IdEstadoFormulario { get; set; }
+        public int IdFormulario { get; set; }
 
         public int? IdChequeo { get; set; }
-
-        public virtual EstadosFormulario EstadosFormulario { get; set; }
     }
 }

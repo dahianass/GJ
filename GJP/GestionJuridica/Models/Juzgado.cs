@@ -22,12 +22,12 @@ namespace GestionJuridica.Models
         [Column("Juzgado")]
         [Required]
         [StringLength(200)]
-        public string NombreJuzgado { get; set; }
+        public string Juzgado1 { get; set; }
 
         public int IdNaturaleza { get; set; }
 
         public virtual Municipio Municipio { get; set; }
 
-        public virtual Naturaleza Naturaleza { get; set; }
+        public virtual Municipio Municipio1 { get; set; }
     }
 }

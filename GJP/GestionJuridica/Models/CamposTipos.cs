@@ -18,5 +18,15 @@ namespace GestionJuridica.Models
         public bool Active { get; set; }
 
         public virtual CamposAdicionales CamposAdicionales { get; set; }
+
+        public virtual CamposAdicionales CamposAdicionales1 { get; set; }
+
+        public virtual CamposAdicionales CamposAdicionales2 { get; set; }
+
+        public virtual CamposAdicionales CamposAdicionales3 { get; set; }
+
+        public virtual CamposAdicionales CamposAdicionales4 { get; set; }
+
+        public virtual CamposAdicionales CamposAdicionales5 { get; set; }
     }
 }

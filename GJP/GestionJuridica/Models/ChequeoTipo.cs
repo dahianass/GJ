@@ -19,5 +19,15 @@ namespace GestionJuridica.Models
         public bool Active { get; set; }
 
         public virtual Chequeo Chequeo { get; set; }
+
+        public virtual Chequeo Chequeo1 { get; set; }
+
+        public virtual Chequeo Chequeo2 { get; set; }
+
+        public virtual Chequeo Chequeo3 { get; set; }
+
+        public virtual Chequeo Chequeo4 { get; set; }
+
+        public virtual Chequeo Chequeo5 { get; set; }
     }
 }

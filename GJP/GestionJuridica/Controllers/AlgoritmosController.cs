@@ -53,7 +53,7 @@ namespace GestionJuridica.Controllers
             return Json(objChequeo, JsonRequestBehavior.AllowGet);
         }
 
-        // POST: Algoritmos/Create
+        // POST: Algoritmos/Cuantia
         [HttpPost]
         public JsonResult Cuantia(CuantiaDto collection)
         {
@@ -106,7 +106,7 @@ namespace GestionJuridica.Controllers
                                      IdMunicipio = Juzg.IdMunicipio,
                                      CircuitoV = Juzg.Circuito,
                                      Juez = Juzg.Juez,
-                                     Juzgado = Juzg.NombreJuzgado,
+                                     Juzgado = Juzg.Juzgado1,
                                      idNaturaleza = Juzg.IdNaturaleza,
                                      Naturaleza = natura.Nombre,
                                  }).ToList();
@@ -130,7 +130,7 @@ namespace GestionJuridica.Controllers
                                      IdMunicipio = Juzg.IdMunicipio,
                                      CircuitoV = Juzg.Circuito,
                                      Juez = Juzg.Juez,
-                                     Juzgado = Juzg.NombreJuzgado,
+                                     Juzgado = Juzg.Juzgado1,
                                      idNaturaleza = Juzg.IdNaturaleza,
                                      Naturaleza = natura.Nombre,
                                  }).ToList();

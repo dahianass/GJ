@@ -29,7 +29,7 @@ namespace GestionJuridica.Controllers
                                            where perm.IdRol == usu.IdRol
                                            select new PermisosDto
                                            {
-                                               IdPagina = perm.IdPagina,
+                                               IdPagina = perm.IdPagina.Value,
                                                NombreP = pag.Nombre,
                                                descripcion = pag.Descripcion,
                                                Editar = perm.Editar,

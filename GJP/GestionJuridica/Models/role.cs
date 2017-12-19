@@ -13,7 +13,6 @@ namespace GestionJuridica.Models
         public role()
         {
             permission = new HashSet<permission>();
-            role_by_action = new HashSet<role_by_action>();
         }
 
         [Key]
@@ -30,8 +29,5 @@ namespace GestionJuridica.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<permission> permission { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<role_by_action> role_by_action { get; set; }
     }
 }

@@ -13,7 +13,13 @@ namespace GestionJuridica.Models
         public Municipio()
         {
             Formulario = new HashSet<Formulario>();
+            Formulario1 = new HashSet<Formulario>();
+            Formulario2 = new HashSet<Formulario>();
+            Formulario3 = new HashSet<Formulario>();
+            Formulario4 = new HashSet<Formulario>();
+            Formulario5 = new HashSet<Formulario>();
             Juzgado = new HashSet<Juzgado>();
+            Juzgado1 = new HashSet<Juzgado>();
         }
 
         [Key]
@@ -27,10 +33,38 @@ namespace GestionJuridica.Models
 
         public virtual Circuito Circuito { get; set; }
 
+        public virtual Circuito Circuito1 { get; set; }
+
+        public virtual Circuito Circuito2 { get; set; }
+
+        public virtual Circuito Circuito3 { get; set; }
+
+        public virtual Circuito Circuito4 { get; set; }
+
+        public virtual Circuito Circuito5 { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Formulario> Formulario { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Formulario> Formulario1 { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Formulario> Formulario2 { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Formulario> Formulario3 { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Formulario> Formulario4 { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Formulario> Formulario5 { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Juzgado> Juzgado { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Juzgado> Juzgado1 { get; set; }
     }
 }

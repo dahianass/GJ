@@ -6,7 +6,6 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.ModelBinding;
 using System.Web.Http.OData;
@@ -16,14 +15,13 @@ using GestionJuridica.Models;
 namespace GestionJuridica.Controllers
 {
     /*
-    The WebApiConfig class may require additional changes to add a route for this controller. Merge these statements into the Register method of the WebApiConfig class as applicable. Note that OData URLs are case sensitive.
+    Puede que la clase WebApiConfig requiera cambios adicionales para agregar una ruta para este controlador. Combine estas instrucciones en el método Register de la clase WebApiConfig según corresponda. Tenga en cuenta que las direcciones URL de OData distinguen mayúsculas de minúsculas.
 
     using System.Web.Http.OData.Builder;
     using System.Web.Http.OData.Extensions;
     using GestionJuridica.Models;
     ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
     builder.EntitySet<ChequeoFormulario>("ChequeoFormularios");
-    builder.EntitySet<EstadosFormulario>("EstadosFormulario"); 
     config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
     */
     public class ChequeoFormulariosController : ODataController
@@ -45,7 +43,7 @@ namespace GestionJuridica.Controllers
         }
 
         // PUT: odata/ChequeoFormularios(5)
-        public async Task<IHttpActionResult> Put([FromODataUri] int key, Delta<ChequeoFormulario> patch)
+        public IHttpActionResult Put([FromODataUri] int key, Delta<ChequeoFormulario> patch)
         {
             Validate(patch.GetEntity());
 
@@ -54,7 +52,7 @@ namespace GestionJuridica.Controllers
                 return BadRequest(ModelState);
             }
 
-            ChequeoFormulario chequeoFormulario = await db.ChequeoFormulario.FindAsync(key);
+            ChequeoFormulario chequeoFormulario = db.ChequeoFormulario.Find(key);
             if (chequeoFormulario == null)
             {
                 return NotFound();
@@ -64,7 +62,7 @@ namespace GestionJuridica.Controllers
 
             try
             {
-                await db.SaveChangesAsync();
+                db.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -82,7 +80,7 @@ namespace GestionJuridica.Controllers
         }
 
         // POST: odata/ChequeoFormularios
-        public async Task<IHttpActionResult> Post(ChequeoFormulario chequeoFormulario)
+        public IHttpActionResult Post(ChequeoFormulario chequeoFormulario)
         {
             if (!ModelState.IsValid)
             {
@@ -90,29 +88,14 @@ namespace GestionJuridica.Controllers
             }
 
             db.ChequeoFormulario.Add(chequeoFormulario);
-
-            try
-            {
-                await db.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (ChequeoFormularioExists(chequeoFormulario.IdCheqeoF))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            db.SaveChanges();
 
             return Created(chequeoFormulario);
         }
 
         // PATCH: odata/ChequeoFormularios(5)
         [AcceptVerbs("PATCH", "MERGE")]
-        public async Task<IHttpActionResult> Patch([FromODataUri] int key, Delta<ChequeoFormulario> patch)
+        public IHttpActionResult Patch([FromODataUri] int key, Delta<ChequeoFormulario> patch)
         {
             Validate(patch.GetEntity());
 
@@ -121,7 +104,7 @@ namespace GestionJuridica.Controllers
                 return BadRequest(ModelState);
             }
 
-            ChequeoFormulario chequeoFormulario = await db.ChequeoFormulario.FindAsync(key);
+            ChequeoFormulario chequeoFormulario = db.ChequeoFormulario.Find(key);
             if (chequeoFormulario == null)
             {
                 return NotFound();
@@ -131,7 +114,7 @@ namespace GestionJuridica.Controllers
 
             try
             {
-                await db.SaveChangesAsync();
+                db.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -149,25 +132,18 @@ namespace GestionJuridica.Controllers
         }
 
         // DELETE: odata/ChequeoFormularios(5)
-        public async Task<IHttpActionResult> Delete([FromODataUri] int key)
+        public IHttpActionResult Delete([FromODataUri] int key)
         {
-            ChequeoFormulario chequeoFormulario = await db.ChequeoFormulario.FindAsync(key);
+            ChequeoFormulario chequeoFormulario = db.ChequeoFormulario.Find(key);
             if (chequeoFormulario == null)
             {
                 return NotFound();
             }
 
             db.ChequeoFormulario.Remove(chequeoFormulario);
-            await db.SaveChangesAsync();
+            db.SaveChanges();
 
             return StatusCode(HttpStatusCode.NoContent);
-        }
-
-        // GET: odata/ChequeoFormularios(5)/EstadosFormulario
-        [EnableQuery]
-        public SingleResult<EstadosFormulario> GetEstadosFormulario([FromODataUri] int key)
-        {
-            return SingleResult.Create(db.ChequeoFormulario.Where(m => m.IdCheqeoF == key).Select(m => m.EstadosFormulario));
         }
 
         protected override void Dispose(bool disposing)

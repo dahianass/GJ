@@ -8,7 +8,8 @@ namespace GestionJuridica.Models
 
     public partial class Pdtes
     {
-                public int IdPdte { get; set; }
+        [Key]
+        public int IdPdte { get; set; }
 
         public int IdUsuario { get; set; }
 

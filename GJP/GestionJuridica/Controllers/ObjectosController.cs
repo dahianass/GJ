@@ -25,7 +25,7 @@ namespace GestionJuridica.Controllers
             {
               
                 PermisosDta objPermisos = new PermisosDta();
-                int DeleteR = objPermisos.deletePermisosRol(permisos.ListPermisos[0].IdRol);
+                int DeleteR = objPermisos.deletePermisosRol(permisos.ListPermisos[0].IdRol.Value);
                 int SaveR = objPermisos.CreatPermisos(permisos.ListPermisos);
 
                 if (SaveR == DeleteR)

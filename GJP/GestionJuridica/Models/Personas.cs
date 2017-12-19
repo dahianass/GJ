@@ -33,6 +33,9 @@ namespace GestionJuridica.Models
         [StringLength(50)]
         public string telefono { get; set; }
 
+        [StringLength(50)]
+        public string Celular { get; set; }
+
         public bool Active { get; set; }
     }
 }
