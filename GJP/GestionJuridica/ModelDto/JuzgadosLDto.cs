@@ -1,5 +1,7 @@
-﻿using System;
+﻿using GestionJuridica.Models;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -11,13 +13,13 @@ namespace GestionJuridica.Dto
 
         public int IdMunicipio { get; set; }
 
-        public bool CircuitoV { get; set; }
-
+        public bool Circuito { get; set; }
+        
         public string Juez { get; set; }
+        
+        public string NombreJuzgado { get; set; }
 
-        public string Juzgado { get; set; }
-
-        public int idNaturaleza { get; set; }
+        public int IdNaturaleza { get; set; }
 
         public string Naturaleza { get; set; }
     }

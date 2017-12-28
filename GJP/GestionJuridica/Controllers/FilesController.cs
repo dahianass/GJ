@@ -1,8 +1,11 @@
 ﻿using GestionJuridica.Models;
+using GestionJuridica.Utilities;
 using Microsoft.Azure;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
+using Newtonsoft.Json;
 using System;
+using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 
@@ -72,11 +75,12 @@ namespace GestionDocument.Controllers
                 }
                 catch (Exception ex)
                 {
+                    var jj = ex;
                     return Json("Error occurred. Error details: " + ex.Message);
                 }
             }
             else
-            {
+            {                
                 return Json("No files selected.");
             }
         }

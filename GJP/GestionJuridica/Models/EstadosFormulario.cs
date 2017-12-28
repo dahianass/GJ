@@ -32,7 +32,7 @@ namespace GestionJuridica.Models
         [Required]
         public string Obsevacion { get; set; }
 
-        public bool Cumplido { get; set; }
+        public int Cumplido { get; set; }
 
         public DateTime? FechaCumplimiento { get; set; }
 

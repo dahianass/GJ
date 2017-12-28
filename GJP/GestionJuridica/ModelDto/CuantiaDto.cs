@@ -7,7 +7,7 @@ namespace GestionJuridica.Dto
 {
     public class CuantiaDto
     {
-        public int valor { get; set; }
+        public long valor { get; set; }
         public int fechaAno { get; set; }
     }
 }

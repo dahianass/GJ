@@ -4,6 +4,7 @@ using GestionJuridica.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 
@@ -15,36 +16,44 @@ namespace GestionJuridica.Controllers
         // GET: Reportes
         public JsonResult GetPdtes()
         {
-            var objResult = from actividad in db.Pdtes
-                             join formulario in db.Formulario on actividad.IdFormulario equals formulario.IdFormulario
-                             join proyecto in db.Proyectos on formulario.IdProyecto equals proyecto.IdProyectos
-                             join contrato in db.Contratos on proyecto.IdContratos equals contrato.IdContrato
-                             join municipioP in db.Municipio on formulario.IdMunicipio equals municipioP.IdMunicipio
-                             where actividad.FechaRecordatorio > DateTime.Now
-                             select new PdtesDto
-                             {
-                                 NombreCliente = formulario.Demandado,
-                                 Contrato = contrato.CodContrato,
-                                 Proyecto = proyecto.NombreProyecto,
-                                 Cproceso = formulario.CodProceso,
-                                 MunicipioP = municipioP.Nombre,
-                                 JuzgadoF = formulario.JuzgadoConocimiento,
-                                 Radicado = formulario.Radicado,
-                                 Demandante = formulario.Demandante,
-                                 Demandado = formulario.Demandado,
-                                 Estadoprocesal = (from Ef in db.EstadosFormulario
-                                                   join EstadosProcesalesF in db.EstadosProcesales on Ef.IdEstados equals EstadosProcesalesF.IdEstados
-                                                   where Ef.IdEstadoFormulario == formulario.IdFormulario
-                                                   orderby Ef.FechaCumplimiento
-                                                   select EstadosProcesalesF.Nombre).FirstOrDefault(),
-                                 Fechapendiente = actividad.FechaRecordatorio,
-                                 IdFormulario = actividad.IdFormulario,
-                                 Actividad = actividad.Actividad,
-                                 Observacion = actividad.Observacion
-                             };
+            try
+            {
+                var objResult = from actividad in db.Pdtes
+                                join formulario in db.Formulario on actividad.IdFormulario equals formulario.IdFormulario
+                                join proyecto in db.Proyectos on formulario.IdProyecto equals proyecto.IdProyectos
+                                join contrato in db.Contratos on proyecto.IdContratos equals contrato.IdContrato
+                                join municipioP in db.Municipio on formulario.IdMunicipio equals municipioP.IdMunicipio
+                                where actividad.FechaRecordatorio > DateTime.Now
+                                select new PdtesDto
+                                {
+                                    NombreCliente = formulario.Demandado,
+                                    Contrato = contrato.CodContrato,
+                                    Proyecto = proyecto.NombreProyecto,
+                                    Cproceso = formulario.CodProceso,
+                                    MunicipioP = municipioP.Nombre,
+                                    JuzgadoF = formulario.JuzgadoConocimiento,
+                                    Radicado = formulario.Radicado,
+                                    Demandante = formulario.Demandante,
+                                    Demandado = formulario.Demandado,
+                                    Estadoprocesal = (from Ef in db.EstadosFormulario
+                                                      join EstadosProcesalesF in db.EstadosProcesales on Ef.IdEstados equals EstadosProcesalesF.IdEstados
+                                                      where Ef.IdEstadoFormulario == formulario.IdFormulario
+                                                      orderby Ef.FechaCumplimiento
+                                                      select EstadosProcesalesF.Nombre).FirstOrDefault(),
+                                    Fechapendiente = actividad.FechaRecordatorio,
+                                    IdFormulario = actividad.IdFormulario,
+                                    Actividad = actividad.Actividad,
+                                    Observacion = actividad.Observacion
+                                };
 
-            var objResuldt = objResult.ToList();
-            return Json(objResuldt, JsonRequestBehavior.AllowGet);
+                var objResuldt = objResult.ToList();
+                return Json(objResuldt, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                LogFile.Save(GetType().Name, MethodBase.GetCurrentMethod().Name, ex.Message);
+                throw;
+            }
         }
 
         public JsonResult todosProcesos()
@@ -81,6 +90,7 @@ namespace GestionJuridica.Controllers
             var objResuldt = objResult.ToList();
             return Json(objResuldt, JsonRequestBehavior.AllowGet);
         }
+
         public JsonResult todosProcesosXResponsable(int responsable)
         {
             var objResult = from actividad in db.Pdtes
@@ -117,6 +127,46 @@ namespace GestionJuridica.Controllers
 
             var objResuldt = objResult.ToList();
             return Json(objResuldt, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult RPTodosProcesos()
+        {
+            try
+            {
+                var objResult = from formulario in db.Formulario
+                                 join Tproceso in db.TipoProcesos on formulario.IdTIpoProceso equals Tproceso.IdTiposProcesos
+                                 join proyecto in db.Proyectos on formulario.IdProyecto equals proyecto.IdProyectos
+                                 join contrato in db.Contratos on proyecto.IdContratos equals contrato.IdContrato
+                                 join municipioP in db.Municipio on formulario.IdMunicipio equals municipioP.IdMunicipio
+                                 join person in db.Personas on formulario.Responsable equals person.IdPersona
+                                 select new procesosDto
+                                 {
+                                     NombreCliente = formulario.Demandado,
+                                     Contrato = contrato.CodContrato,
+                                     Proyecto = proyecto.NombreProyecto,
+                                     Cproceso = formulario.CodProceso,
+                                     MunicipioP = municipioP.Nombre,
+                                     JuzgadoF = formulario.JuzgadoConocimiento,
+                                     Radicado = formulario.Radicado,
+                                     Demandante = formulario.Demandante,
+                                     Demandado = formulario.Demandado,
+                                     tipoProceso = Tproceso.Nombre,
+                                     Estadoprocesal = (from Ef in db.EstadosFormulario
+                                                       join EstadosProcesalesF in db.EstadosProcesales on Ef.IdEstados equals EstadosProcesalesF.IdEstados
+                                                       where Ef.IdEstadoFormulario == formulario.IdFormulario
+                                                       orderby Ef.FechaCumplimiento
+                                                       select EstadosProcesalesF.Nombre).FirstOrDefault(),
+                                     Responsable = person.Nombre,
+                                     IdFormulario = formulario.IdFormulario
+                                 };
+
+                return Json(objResult, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                LogFile.Save(GetType().Name, MethodBase.GetCurrentMethod().Name, ex.Message);
+                throw;
+            }
         }
     }
 }

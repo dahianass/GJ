@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using GestionJuridica.Utilities;
+using GestionJuridica.ModelDto;
 
 namespace GestionJuridica.Controllers
 {
@@ -12,11 +13,13 @@ namespace GestionJuridica.Controllers
     {
         private ModelJuridica db = new ModelJuridica();
 
-        public JsonResult Index(string correo, string password)
+        // POST: Login/Index
+        [HttpPost]
+        public JsonResult Index(Usuario userIn)
         {
             Rpta obj = new Rpta();
             var usuario = (from usu in db.user
-                           where usu.Active == true && usu.email == correo
+                           where usu.Active == true && usu.email == userIn.User
                            select new MenuDto
                            {
                                id_user = usu.id_user,
@@ -41,7 +44,7 @@ namespace GestionJuridica.Controllers
             {
                 var id = Convert.ToInt32(usuario.IdRol);
                 var pass = Encrypt.Decrypt(usuario.Password);
-                if (pass == password)
+                if (pass == userIn.Password)
                 {
                     obj.error = false;
                     obj.result = true;

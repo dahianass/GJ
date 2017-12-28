@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Reflection;
 
 namespace GestionJuridica.Controllers
 {
@@ -36,7 +37,6 @@ namespace GestionJuridica.Controllers
             return View();
         }
 
-
         // GET: Algoritmos/Chequeo(1)
         public JsonResult chequeo(int id) {
             var objChequeo = (from cheqTipo in db.ChequeoTipo
@@ -59,8 +59,7 @@ namespace GestionJuridica.Controllers
         {
             try
             {
-
-                var cuantia="";
+                var cuantia = string.Empty;
                 smlv salario = db.smlv.Where(e => e.Ano == collection.fechaAno).FirstOrDefault();
                 int valorS = salario.Valor;
                 if (valorS > 0)
@@ -93,9 +92,9 @@ namespace GestionJuridica.Controllers
         public JsonResult Juzgados(JuzgadosDto collection)
         {
             try
-            {
+            {               
                 List<JuzgadosLDto> objResult = new List<JuzgadosLDto>();
-                if ((collection.Cuantia == "MÍNIMA")||(collection.Cuantia =="Mínima") || (collection.Cuantia.ToLower() == "mínima") || (collection.Cuantia.ToLower() == "minima"))
+                if ((collection.Cuantia == "MÍNIMA") || (collection.Cuantia == "Mínima") || (collection.Cuantia.ToLower() == "mínima") || (collection.Cuantia.ToLower() == "minima"))
                 {
                     objResult = (from Juzg in db.Juzgado
                                  join natura in db.Naturaleza on Juzg.IdNaturaleza equals natura.IdNaturaleza
@@ -104,34 +103,29 @@ namespace GestionJuridica.Controllers
                                  {
                                      IdJuzgado = Juzg.IdJuzgado,
                                      IdMunicipio = Juzg.IdMunicipio,
-                                     CircuitoV = Juzg.Circuito,
+                                     Circuito = Juzg.Circuito,
                                      Juez = Juzg.Juez,
-                                     Juzgado = Juzg.Juzgado1,
-                                     idNaturaleza = Juzg.IdNaturaleza,
+                                     NombreJuzgado = Juzg.NombreJuzgado,
+                                     IdNaturaleza = Juzg.IdNaturaleza,
                                      Naturaleza = natura.Nombre,
                                  }).ToList();
                 }
                 else
                 {
-                    Municipio circuito = (from mun in db.Municipio
-                                          where mun.IdMunicipio == collection.idMunicipio
-                                          select new Municipio
-                                          {
-                                              IdCircuito = mun.IdCircuito
-                                          }).FirstOrDefault();
+                    var circuito = db.Municipio.ToList().Find(x => x.IdMunicipio == collection.idMunicipio).IdCircuito;
 
                     objResult = (from mun in db.Municipio
                                  join Juzg in db.Juzgado on mun.IdMunicipio equals Juzg.IdMunicipio
                                  join natura in db.Naturaleza on Juzg.IdNaturaleza equals natura.IdNaturaleza
-                                 where mun.IdCircuito == circuito.IdCircuito && Juzg.Circuito == true
+                                 where mun.IdCircuito == circuito && Juzg.Circuito == true
                                  select new JuzgadosLDto
                                  {
                                      IdJuzgado = Juzg.IdJuzgado,
                                      IdMunicipio = Juzg.IdMunicipio,
-                                     CircuitoV = Juzg.Circuito,
+                                     Circuito = Juzg.Circuito,
                                      Juez = Juzg.Juez,
-                                     Juzgado = Juzg.Juzgado1,
-                                     idNaturaleza = Juzg.IdNaturaleza,
+                                     NombreJuzgado = Juzg.NombreJuzgado,
+                                     IdNaturaleza = Juzg.IdNaturaleza,
                                      Naturaleza = natura.Nombre,
                                  }).ToList();
                 }
@@ -139,10 +133,39 @@ namespace GestionJuridica.Controllers
             }
             catch (Exception ex)
             {
-
+                LogFile.Save(GetType().Name, MethodBase.GetCurrentMethod().Name, ex.Message);
                 throw;
+            }            
+        }
+
+        //POST: Algoritmos/GuardarPermisos
+        [HttpPost]
+        public JsonResult GuardarPermisos(List<Permisos> listPermisos)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    throw new HttpException(404, "Item Not Found");
+                }
+                var query =  db.Permisos.AsEnumerable().Where(r => r.IdRol == listPermisos.First().IdRol);
+                foreach (var item in query.ToList())
+                {
+                    db.Permisos.Remove(item);
+                }
+                foreach (var item in listPermisos)
+                {
+                    db.Permisos.Add(item);
+                    db.SaveChanges();
+
+                }
+                return Json(true, JsonRequestBehavior.AllowGet);
             }
-            
+            catch (Exception ex)
+            {
+                throw new HttpException(404, "Item Not Found");
+            }
+
         }
 
         // GET: Algoritmos/Edit/5
@@ -187,6 +210,13 @@ namespace GestionJuridica.Controllers
             {
                 return View();
             }
+        }
+
+
+        public ActionResult Test()
+        {          
+            LogFile.Save(GetType().Name, MethodBase.GetCurrentMethod().Name, "Hds");
+            return Json("Jsle", JsonRequestBehavior.AllowGet);
         }
     }
 }
