@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Reflection;
+using GestionJuridica.ModelDto;
 
 namespace GestionJuridica.Controllers
 {
@@ -77,7 +78,7 @@ namespace GestionJuridica.Controllers
                         cuantia = "MAYOR";
                     }
                 } else {
-                    cuantia = "{mesage:'no hay un valor para el año'"+collection.fechaAno+"}";
+                    cuantia = "{mesage:'no hay un valor para el año'" + collection.fechaAno + "}";
                 }
                 return Json(cuantia);
             }
@@ -92,7 +93,7 @@ namespace GestionJuridica.Controllers
         public JsonResult Juzgados(JuzgadosDto collection)
         {
             try
-            {               
+            {
                 List<JuzgadosLDto> objResult = new List<JuzgadosLDto>();
                 if ((collection.Cuantia == "MÍNIMA") || (collection.Cuantia == "Mínima") || (collection.Cuantia.ToLower() == "mínima") || (collection.Cuantia.ToLower() == "minima"))
                 {
@@ -129,13 +130,13 @@ namespace GestionJuridica.Controllers
                                      Naturaleza = natura.Nombre,
                                  }).ToList();
                 }
-                return Json(objResult,JsonRequestBehavior.AllowGet);
+                return Json(objResult, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
                 LogFile.Save(GetType().Name, MethodBase.GetCurrentMethod().Name, ex.Message);
                 throw;
-            }            
+            }
         }
 
         //POST: Algoritmos/GuardarPermisos
@@ -148,7 +149,7 @@ namespace GestionJuridica.Controllers
                 {
                     throw new HttpException(404, "Item Not Found");
                 }
-                var query =  db.Permisos.AsEnumerable().Where(r => r.IdRol == listPermisos.First().IdRol);
+                var query = db.Permisos.AsEnumerable().Where(r => r.IdRol == listPermisos.First().IdRol);
                 foreach (var item in query.ToList())
                 {
                     db.Permisos.Remove(item);
@@ -180,8 +181,6 @@ namespace GestionJuridica.Controllers
         {
             try
             {
-                // TODO: Add update logic here
-
                 return RedirectToAction("Index");
             }
             catch
@@ -202,8 +201,6 @@ namespace GestionJuridica.Controllers
         {
             try
             {
-                // TODO: Add delete logic here
-
                 return RedirectToAction("Index");
             }
             catch
@@ -212,6 +209,122 @@ namespace GestionJuridica.Controllers
             }
         }
 
+        // GET: Algoritmos/CorreosInterventores/1
+        public JsonResult CorreosInterventores(int id)
+        {
+            try
+            {
+                var correo = (from form in db.Formulario
+                              join proy in db.Proyectos on form.IdProyecto equals proy.IdProyectos
+                              where form.IdFormulario == id
+                              select new EmailInterventores()
+                              {
+                                  InterventorJuridico = (from person in db.Personas where person.IdPersona == proy.Interventor select person.Correo).FirstOrDefault(),
+                                  InterventorTecnico = (from person in db.Personas where person.IdPersona == proy.Representador select person.Correo).FirstOrDefault()
+                              }).ToList();
+
+                return Json(correo, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                LogFile.Save(GetType().Name, MethodBase.GetCurrentMethod().Name, ex.Message);
+                throw;
+            }
+        }
+
+        // GET: Algoritmos/CorreosAdmin
+        public JsonResult CorreosAdmin()
+        {
+            try
+            {
+                var correo = (from users in db.user
+                              join rols in db.Rol on users.IdRol equals rols.IdRol
+                              where rols.IdRol == 1
+                              select users.email).ToList();
+
+                return Json(correo, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                LogFile.Save(GetType().Name, MethodBase.GetCurrentMethod().Name, ex.Message);
+                throw;
+            }
+        }
+
+        // GET: Algoritmos/CorreosAbogados
+        public JsonResult CorreosAbogados()
+        {
+            try
+            {
+                var correo = (from users in db.user
+                              join rols in db.Rol on users.IdRol equals rols.IdRol
+                              where rols.IdRol == 2
+                              select users.email).ToList();
+                
+                return Json(correo, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                LogFile.Save(GetType().Name, MethodBase.GetCurrentMethod().Name, ex.Message);
+                throw;
+            }
+        }
+
+        //TODO: Activar el job
+        // GET: Algoritmos/EnviarRecordatorios
+        public JsonResult EnviarRecordatorios()
+        {
+            try
+            {
+                var objResult = from actividad in db.Pdtes
+                                join formulario in db.Formulario on actividad.IdFormulario equals formulario.IdFormulario
+                                join proyecto in db.Proyectos on formulario.IdProyecto equals proyecto.IdProyectos
+                                join contrato in db.Contratos on proyecto.IdContratos equals contrato.IdContrato
+                                join municipioP in db.Municipio on formulario.IdMunicipio equals municipioP.IdMunicipio
+                                where actividad.FechaRecordatorio > DateTime.Now
+                                select new PdtesDto
+                                {
+                                    NombreCliente = formulario.Demandado,
+                                    Contrato = contrato.CodContrato,
+                                    Proyecto = proyecto.NombreProyecto,
+                                    Cproceso = formulario.CodProceso,
+                                    MunicipioP = municipioP.Nombre,
+                                    JuzgadoF = formulario.JuzgadoConocimiento,
+                                    Radicado = formulario.Radicado,
+                                    Demandante = formulario.Demandante,
+                                    Demandado = formulario.Demandado,
+                                    Estadoprocesal = (from Ef in db.EstadosFormulario
+                                                      join EstadosProcesalesF in db.EstadosProcesales on Ef.IdEstados equals EstadosProcesalesF.IdEstados
+                                                      where Ef.IdEstadoFormulario == formulario.IdFormulario
+                                                      orderby Ef.FechaCumplimiento
+                                                      select EstadosProcesalesF.Nombre).FirstOrDefault(),
+                                    Fechapendiente = actividad.FechaRecordatorio,
+                                    IdFormulario = actividad.IdFormulario,
+                                    Actividad = actividad.Actividad,
+                                    Observacion = actividad.Observacion
+                                };
+
+                var objResuldt = objResult.ToList();
+
+
+                var correos = (from users in db.user
+                              join rols in db.Rol on users.IdRol equals rols.IdRol
+                              where (rols.IdRol == 2 || rols.IdRol == 1)
+                              select users.email).ToList();               
+
+                foreach (var item in objResuldt)
+                {
+                    SendEmail.SendAlerta(correos, "El proceso " + item.Cproceso + " tiene un pendiente.",
+                        "El proceso " + item.Cproceso.Replace("\n", " ") + " del demandado " + item.Demandado.Replace("\n"," ") + ", con el radicado " + item.Radicado.Replace("\n", " ") + " ubicado en el municipio de " + item.MunicipioP.Replace("\n", " ") + " en el juzgado " + item.JuzgadoF.Replace("\n", " ") + ", tiene programado:\n\n" + item.Actividad + ": " + item.Observacion);
+                }
+                return Json(objResuldt, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                LogFile.Save(GetType().Name, MethodBase.GetCurrentMethod().Name, ex.Message);
+                throw;
+            }
+        }
 
         public ActionResult Test()
         {          

@@ -34,7 +34,7 @@ namespace GestionJuridica.Models
 
         public int Cumplido { get; set; }
 
-        public DateTime? FechaCumplimiento { get; set; }
+        public DateTime FechaCumplimiento { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Documentos> Documentos { get; set; }

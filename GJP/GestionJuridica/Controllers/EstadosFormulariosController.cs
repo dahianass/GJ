@@ -12,6 +12,7 @@ using System.Web.Http.ModelBinding;
 using System.Web.Http.OData;
 using System.Web.Http.OData.Routing;
 using GestionJuridica.Models;
+using GestionJuridica.Utilities;
 
 namespace GestionJuridica.Controllers
 {
@@ -92,6 +93,20 @@ namespace GestionJuridica.Controllers
 
             db.EstadosFormulario.Add(estadosFormulario);
             await db.SaveChangesAsync();
+
+            var subject = (from form in db.Formulario
+                           where form.IdFormulario == estadosFormulario.IdFormulario
+                           select form.CodProceso).FirstOrDefault();
+            subject += " - " + (from Ep in db.EstadosProcesales
+                                where Ep.IdEstados == estadosFormulario.IdEstados
+                                select Ep.Nombre).FirstOrDefault();
+
+            var correos = (from users in db.user
+                           join rols in db.Rol on users.IdRol equals rols.IdRol
+                           where (rols.IdRol == 2 || rols.IdRol == 1)
+                           select users.email).ToList();
+
+            CreateAppointment.Create(correos, subject, estadosFormulario.Obsevacion, estadosFormulario.FechaCumplimiento);
 
             return Created(estadosFormulario);
         }

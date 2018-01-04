@@ -17,7 +17,7 @@
     <AssemblyName>GestionJuridica</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort />
+    <IISExpressSSLPort>44369</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -98,6 +98,14 @@
     </Reference>
     <Reference Include="Microsoft.Data.Services.Client, Version=5.8.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Data.Services.Client.5.8.2\lib\net40\Microsoft.Data.Services.Client.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Exchange.WebServices, Version=15.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Exchange.WebServices.2.2\lib\40\Microsoft.Exchange.WebServices.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Exchange.WebServices.Auth, Version=15.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Exchange.WebServices.2.2\lib\40\Microsoft.Exchange.WebServices.Auth.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.WindowsAzure.Configuration, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -237,6 +245,8 @@
     <Compile Include="Data\PermisosDta.cs" />
     <Compile Include="ModelDto\ChequeoDto.cs" />
     <Compile Include="ModelDto\CuantiaDto.cs" />
+    <Compile Include="ModelDto\EmailInterventores.cs" />
+    <Compile Include="ModelDto\UserRolDto.cs" />
     <Compile Include="ModelDto\Usuario.cs" />
     <Compile Include="Models\action.cs" />
     <Compile Include="Models\Auditoria.cs" />
@@ -272,6 +282,7 @@
     <Compile Include="Models\TipoProcesos.cs" />
     <Compile Include="Models\user.cs" />
     <Compile Include="Models\Usuarios.cs" />
+    <Compile Include="Utilities\CreateAppointment.cs" />
     <Compile Include="Utilities\Encrypt.cs" />
     <Compile Include="ModelDto\JuzgadosDto.cs" />
     <Compile Include="ModelDto\JuzgadosLDto.cs" />
@@ -288,6 +299,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\LogFile.cs" />
+    <Compile Include="Utilities\SendEmail.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />

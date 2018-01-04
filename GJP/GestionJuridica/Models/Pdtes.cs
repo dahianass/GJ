@@ -22,8 +22,7 @@ namespace GestionJuridica.Models
         public int? IdEstado { get; set; }
 
         public int IdFormulario { get; set; }
-
-        [StringLength(500)]
+        
         public string Correo { get; set; }
 
         [Required]

@@ -11,6 +11,9 @@ using System.Web.Http.ModelBinding;
 using System.Web.Http.OData;
 using System.Web.Http.OData.Routing;
 using GestionJuridica.Models;
+using GestionJuridica.Utilities;
+using Microsoft.Exchange.WebServices.Data;
+using System.ComponentModel.DataAnnotations;
 
 namespace GestionJuridica.Controllers
 {
@@ -90,6 +93,17 @@ namespace GestionJuridica.Controllers
 
             db.Pdtes.Add(pdtes);
             db.SaveChanges();
+
+            var sCorreos = pdtes.Correo.Split(',').ToList();
+            var foo = new EmailAddressAttribute();
+            foreach (var item in sCorreos)
+            {
+                if (!foo.IsValid(item))
+                {
+                    sCorreos.Remove(item);
+                } 
+            }
+            CreateAppointment.Create(sCorreos, pdtes.Actividad, pdtes.Observacion, pdtes.FechaRecordatorio);
 
             return Created(pdtes);
         }

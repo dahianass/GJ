@@ -18,7 +18,7 @@ namespace GestionJuridica.Utilities
         public string Demandado { get; set; }
         public string Estadoprocesal { get; set; }
         public int IdFormulario { get; set; }
-        public string tipoProceso { get; set; }
+        public string TipoProceso { get; set; }
         public string Responsable { get; set; }
         public string ResponsableSucesor { get; set; }
 
