@@ -160,7 +160,8 @@ namespace GestionJuridica.Controllers
                     db.SaveChanges();
 
                 }
-                return Json(true, JsonRequestBehavior.AllowGet);
+                var message = "Se ha guardado con exito";
+                return Json(message, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {

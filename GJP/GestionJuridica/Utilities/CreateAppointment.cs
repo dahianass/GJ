@@ -1,6 +1,7 @@
 ﻿using Microsoft.Exchange.WebServices.Data;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -11,8 +12,8 @@ namespace GestionJuridica.Utilities
     {
         public static void Create(List<string> emails, string subject, string body, DateTime date)
         {
-            var user = "apineda@igga.com.co";
-            var password = "Alejo8090*";
+            var user = ConfigurationManager.AppSettings["EmailConfig"];
+            var password = ConfigurationManager.AppSettings["PasswordConfig"];
             ExchangeService service = new ExchangeService();
             service.Credentials = new NetworkCredential(user, password);
             service.AutodiscoverUrl(user, RedirectionCallback);

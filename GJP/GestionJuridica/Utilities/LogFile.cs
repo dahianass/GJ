@@ -24,7 +24,9 @@ namespace GestionJuridica.Utilities
                 wt.WriteLine(method.ToUpper() + "  -  " + DateTime.Now.ToString());
                 wt.WriteLine(message);
                 wt.WriteLine("====================================================");
+                wt.Close();
             }
+            
         }
     }
 }

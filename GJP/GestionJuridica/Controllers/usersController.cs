@@ -61,7 +61,7 @@ namespace GestionJuridica.Controllers
             {
                 return NotFound();
             }
-
+            
             patch.Put(user);
 
             try

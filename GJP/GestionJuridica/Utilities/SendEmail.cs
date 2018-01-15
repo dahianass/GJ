@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Linq;
 using System.Net.Mail;
 using System.Web;
@@ -11,8 +12,8 @@ namespace GestionJuridica.Utilities
     {
         public static void SendAlerta(List<string> emails, string subject, string body)
         {
-            var user = "apineda@igga.com.co";
-            var password = "Alejo8090*";
+            var user = ConfigurationManager.AppSettings["EmailConfig"];
+            var password = ConfigurationManager.AppSettings["PasswordConfig"];
             SmtpClient client = new SmtpClient("smtp.office365.com", 587);
             client.EnableSsl = true;
             client.Credentials = new System.Net.NetworkCredential(user, password);
