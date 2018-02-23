@@ -61,6 +61,11 @@ namespace GestionJuridica.Controllers
             {
                 return NotFound();
             }
+
+            if (patch.GetEntity().Password.Contains("[*IGGA*]"))
+            {
+                patch.GetEntity().Password = Encrypt.EncryptD(patch.GetEntity().Password.Replace("[*IGGA*]", ""));
+            }
             
             patch.Put(user);
 

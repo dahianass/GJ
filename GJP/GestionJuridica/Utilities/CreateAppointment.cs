@@ -22,8 +22,8 @@ namespace GestionJuridica.Utilities
 
             appointment.Subject = subject;
             appointment.Body = body;
-            appointment.Start = date.AddHours(12);
-            appointment.End = date.AddHours(13);
+            appointment.Start = date.AddHours(5);
+            appointment.End = date.AddHours(6);
             appointment.ReminderDueBy = DateTime.Now;
             foreach (var email in emails)
             {

@@ -319,7 +319,13 @@
     <None Include="Properties\PublishProfiles\GestionJuridica - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\JuridicaQA - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\JuridicaQA - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\sistemadegestionjuridica - FTP %282%29.pubxml" />
+    <None Include="Properties\PublishProfiles\sistemadegestionjuridica - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\sistemadegestionjuridica - Web Deploy %282%29.pubxml" />
+    <None Include="Properties\PublishProfiles\sistemadegestionjuridica - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\SistemaGestionJuridicaDllo - FTP %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\SistemaGestionJuridicaDllo - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\SistemaGestionJuridicaDllo - Web Deploy %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\SistemaGestionJuridicaDllo - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
